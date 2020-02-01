@@ -1,4 +1,3 @@
-import os
 import re
 import tokenizer
 
@@ -8,10 +7,10 @@ Reads conll file, and 1) Splits it by different components of each examples, and
 conll: lemma-tab-target-tab-features
 """
 
-""" Reads conll file, split to line, and splits each line by tabs
-	Returns list of lists"""
+
 def read_morph_file(morph_file_path):
-	# Read lines of file
+	""" Reads conll file, split to line, and splits each line by tabs. Returns list of lists"""
+	# Get all lines in file
 	morph_file = open(morph_file_path, 'r', encoding='utf-8')
 	lines = morph_file.readlines()
 
@@ -24,15 +23,15 @@ def read_morph_file(morph_file_path):
 	morph_file.close()
 	return outputs
 
-""" Reads conll train file, and splits to lists of input lemmas, input features and target lemmas"""
-
 
 def clean_word(word):
+	""" Strips word of unnecessary symbols """
 	word = re.sub("[!@#$']", '', word)
 	return word.lower()
 
 
 def read_train_file(train_file_path):
+	""" Reads conll train file, and splits to lists of input lemmas, input features and target lemmas"""
 	lemmas = []
 	targets = []
 	features = []
@@ -47,8 +46,8 @@ def read_train_file(train_file_path):
 	return lemmas, targets, features
 
 
-""" Reads conll test file, and splits to lists of input lemmas, input features and target lemmas"""
 def read_test_file(test_input_file):
+	""" Reads conll test file, and splits to lists of input lemmas, input features and target lemmas"""
 	lemmas = []
 	features = []
 	test_morph_list = read_morph_file(test_input_file)
@@ -61,9 +60,9 @@ def read_test_file(test_input_file):
 	return lemmas, features
 
 
-""" Reads conll train file, and splits to input tokens and target tokens.
-	Each input and target is a list of tokens"""
 def read_train_file_tokens(train_file_path):
+	""" Reads conll train file, and splits to input tokens and target tokens.
+	Each input and target is a list of tokens"""
 	lemmas, targets, features = read_train_file(train_file_path)
 	# tokenize all three lists, get as list of tokens lists
 	lemmas_tokens = tokenizer.tokenize_words(lemmas)
@@ -74,9 +73,8 @@ def read_train_file_tokens(train_file_path):
 	return input_tokens, targets_tokens
 
 
-""" Reads conll test file.
-	Each input is a list of tokens"""
 def read_test_file_tokens(test_file_path):
+	""" Reads conll test file. Each input is a list of tokens"""
 	lemmas, features = read_test_file(test_file_path)
 	# tokenize all two lists, get as list of tokens lists
 	lemmas_tokens = tokenizer.tokenize_words(lemmas)
