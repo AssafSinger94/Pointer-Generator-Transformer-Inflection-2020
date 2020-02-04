@@ -1,0 +1,90 @@
+TransformerModel(
+  (encoder): TransformerEncoder(
+    (embed_tokens): Embedding(56, 64, padding_idx=1)
+    (embed_positions): SinusoidalPositionalEmbedding()
+    (layers): ModuleList(
+      (0): TransformerEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (k_proj): Linear(in_features=64, out_features=64, bias=True)
+          (v_proj): Linear(in_features=64, out_features=64, bias=True)
+          (q_proj): Linear(in_features=64, out_features=64, bias=True)
+          (out_proj): Linear(in_features=64, out_features=64, bias=True)
+        )
+        (self_attn_layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=64, out_features=256, bias=True)
+        (fc2): Linear(in_features=256, out_features=64, bias=True)
+        (final_layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      )
+      (1): TransformerEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (k_proj): Linear(in_features=64, out_features=64, bias=True)
+          (v_proj): Linear(in_features=64, out_features=64, bias=True)
+          (q_proj): Linear(in_features=64, out_features=64, bias=True)
+          (out_proj): Linear(in_features=64, out_features=64, bias=True)
+        )
+        (self_attn_layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=64, out_features=256, bias=True)
+        (fc2): Linear(in_features=256, out_features=64, bias=True)
+        (final_layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+  )
+  (decoder): TransformerDecoder(
+    (embed_tokens): Embedding(48, 64, padding_idx=1)
+    (embed_positions): SinusoidalPositionalEmbedding()
+    (layers): ModuleList(
+      (0): TransformerDecoderLayer(
+        (self_attn): MultiheadAttention(
+          (k_proj): Linear(in_features=64, out_features=64, bias=True)
+          (v_proj): Linear(in_features=64, out_features=64, bias=True)
+          (q_proj): Linear(in_features=64, out_features=64, bias=True)
+          (out_proj): Linear(in_features=64, out_features=64, bias=True)
+        )
+        (self_attn_layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (k_proj): Linear(in_features=64, out_features=64, bias=True)
+          (v_proj): Linear(in_features=64, out_features=64, bias=True)
+          (q_proj): Linear(in_features=64, out_features=64, bias=True)
+          (out_proj): Linear(in_features=64, out_features=64, bias=True)
+        )
+        (encoder_attn_layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=64, out_features=256, bias=True)
+        (fc2): Linear(in_features=256, out_features=64, bias=True)
+        (final_layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      )
+      (1): TransformerDecoderLayer(
+        (self_attn): MultiheadAttention(
+          (k_proj): Linear(in_features=64, out_features=64, bias=True)
+          (v_proj): Linear(in_features=64, out_features=64, bias=True)
+          (q_proj): Linear(in_features=64, out_features=64, bias=True)
+          (out_proj): Linear(in_features=64, out_features=64, bias=True)
+        )
+        (self_attn_layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (k_proj): Linear(in_features=64, out_features=64, bias=True)
+          (v_proj): Linear(in_features=64, out_features=64, bias=True)
+          (q_proj): Linear(in_features=64, out_features=64, bias=True)
+          (out_proj): Linear(in_features=64, out_features=64, bias=True)
+        )
+        (encoder_attn_layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=64, out_features=256, bias=True)
+        (fc2): Linear(in_features=256, out_features=64, bias=True)
+        (final_layer_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+  )
+
+criterion='cross_entropy'
+min_loss_scale=0.0001
+activation_dropout=0.0, activation_fn='relu', optimizer='adam', optimizer_overrides='{}', adam_betas='(0.9, 0.999)', adam_eps=1e-08, adaptive_input=False, 
+
+adaptive_softmax_cutoff=None, adaptive_softmax_dropout=0, arch='transformer', attention_dropout=0.0, best_checkpoint_metric='loss'
+curriculum=0, data='morph-bin/english/medium', dataset_impl=None, ddp_backend='c10d', decoder_attention_heads=4, decoder_embed_dim=64, decoder_embed_path=None, 
+
+decoder_ffn_embed_dim=256, decoder_input_dim=64, decoder_layerdrop=0, decoder_layers=2, decoder_layers_to_keep=None, decoder_learned_pos=False, decoder_normalize_before=False, 
+dropout=0.2, empty_cache_freq=0, encoder_attention_heads=4, encoder_embed_dim=64, encoder_embed_path=None, encoder_ffn_embed_dim=256, encoder_layerdrop=0, encoder_layers=2, encoder_layers_to_keep=None, encoder_learned_pos=False, encoder_normalize_before=False, no_token_positional_embeddings=False,
+
+lr=[0.0005], lr_scheduler='fixed', lr_shrink=0.1, max_epoch=80, raw_text=False, required_batch_size_multiple=8, 
+
+Namespace(align_suffix=None, alignfile=None, bpe=None, cpu=False, criterion='cross_entropy', dataset_impl='mmap', destdir='morph-bin/english/medium', empty_cache_freq=0, fp16=False, fp16_init_scale=128, fp16_scale_tolerance=0.0, fp16_scale_window=None, joined_dictionary=False, log_format=None, log_interval=1000, lr_scheduler='fixed', memory_efficient_fp16=False, min_loss_scale=0.0001, no_progress_bar=False, nwordssrc=-1, nwordstgt=-1, only_source=False, optimizer='nag', padding_factor=8, seed=1, source_lang='input', srcdict=None, target_lang='output', task='translation', tensorboard_logdir='', testpref='morph/english-test', tgtdict=None, threshold_loss_scale=None, thresholdsrc=0, thresholdtgt=0, tokenizer=None, trainpref='morph/english-train-medium', user_dir=None, validpref='morph/english-dev', workers=1)
+Namespace(activation_dropout=0.0, activation_fn='relu', adam_betas='(0.9, 0.999)', adam_eps=1e-08, adaptive_input=False, adaptive_softmax_cutoff=None, adaptive_softmax_dropout=0, arch='transformer', attention_dropout=0.0, best_checkpoint_metric='loss', bpe=None, bucket_cap_mb=25, clip_norm=0.1, cpu=False, criterion='cross_entropy', cross_self_attention=False, curriculum=0, data='morph-bin/english/medium', dataset_impl=None, ddp_backend='c10d', decoder_attention_heads=4, decoder_embed_dim=64, decoder_embed_path=None, decoder_ffn_embed_dim=256, decoder_input_dim=64, decoder_layerdrop=0, decoder_layers=2, decoder_layers_to_keep=None, decoder_learned_pos=False, decoder_normalize_before=False, decoder_output_dim=64, device_id=0, disable_validation=False, distributed_backend='nccl', distributed_init_method=None, distributed_no_spawn=False, distributed_port=-1, distributed_rank=0, distributed_world_size=1, dropout=0.2, empty_cache_freq=0, encoder_attention_heads=4, encoder_embed_dim=64, encoder_embed_path=None, encoder_ffn_embed_dim=256, encoder_layerdrop=0, encoder_layers=2, encoder_layers_to_keep=None, encoder_learned_pos=False, encoder_normalize_before=False, fast_stat_sync=False, find_unused_parameters=False, fix_batches_to_gpus=False, fixed_validation_seed=None, force_anneal=None, fp16=False, fp16_init_scale=128, fp16_scale_tolerance=0.0, fp16_scale_window=None, keep_interval_updates=-1, keep_last_epochs=-1, layer_wise_attention=False, layernorm_embedding=False, lazy_load=False, left_pad_source='True', left_pad_target='False', load_alignments=False, log_format=None, log_interval=1000, lr=[0.0005], lr_scheduler='fixed', lr_shrink=0.1, max_epoch=80, max_sentences=None, max_sentences_valid=None, max_source_positions=1024, max_target_positions=1024, max_tokens=100, max_tokens_valid=100, max_update=0, maximize_best_checkpoint_metric=False, memory_efficient_fp16=False, min_loss_scale=0.0001, min_lr=-1, no_cross_attention=False, no_epoch_checkpoints=False, no_last_checkpoints=False, no_progress_bar=False, no_save=False, no_save_optimizer_state=False, no_scale_embedding=False, no_token_positional_embeddings=False, num_workers=1, optimizer='adam', optimizer_overrides='{}', raw_text=False, required_batch_size_multiple=8, reset_DataLoader=False, reset_lr_scheduler=False, reset_meters=False, reset_optimizer=False, restore_file='checkpoint_last.pt', save_dir='/scratch/as12152/code/Thesis/fairseq/checkpoints-morph-ADAM/english/medium/transformer-dim-64-ffn_dim-256-heads-4-layers-2', save_interval=1, save_interval_updates=0, seed=1, sentence_avg=False, share_all_embeddings=False, share_decoder_input_output_embed=False, skip_invalid_size_inputs_valid_test=False, source_lang=None, target_lang=None, task='translation', tensorboard_logdir='', threshold_loss_scale=None, tokenizer=None, train_subset='train', update_freq=[1], upsample_primary=1, use_bmuf=False, user_dir=None, valid_subset='valid', validate_interval=1, warmup_updates=0, weight_decay=0.0)

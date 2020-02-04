@@ -1,0 +1,390 @@
+Train Epoch: 1, loss: 3.46279
+Validation. Epoch: 1, loss: 2.7975, accuracy: 0.0000
+New best Loss, 
+
+Train Epoch: 2, loss: 2.77985
+Validation. Epoch: 2, loss: 2.2602, accuracy: 0.0000
+New best Loss, 
+
+Train Epoch: 3, loss: 2.35890
+Validation. Epoch: 3, loss: 1.8609, accuracy: 0.0030
+New best Loss, 
+
+Train Epoch: 4, loss: 1.99574
+Validation. Epoch: 4, loss: 1.4557, accuracy: 0.0120
+New best Loss, 
+
+Train Epoch: 5, loss: 1.63341
+Validation. Epoch: 5, loss: 1.0418, accuracy: 0.0310
+New best Loss, 
+
+Train Epoch: 6, loss: 1.28555
+Validation. Epoch: 6, loss: 0.7152, accuracy: 0.1000
+New best Loss, 
+
+Train Epoch: 7, loss: 1.02065
+Validation. Epoch: 7, loss: 0.5418, accuracy: 0.1560
+New best Loss, 
+
+Train Epoch: 8, loss: 0.83530
+Validation. Epoch: 8, loss: 0.4461, accuracy: 0.1840
+New best Loss, 
+
+Train Epoch: 9, loss: 0.69887
+Validation. Epoch: 9, loss: 0.3861, accuracy: 0.2450
+New best Loss, 
+
+Train Epoch: 10, loss: 0.60654
+Validation. Epoch: 10, loss: 0.3500, accuracy: 0.2580
+New best Loss, 
+
+Train Epoch: 11, loss: 0.55553
+Validation. Epoch: 11, loss: 0.3310, accuracy: 0.2540
+New best Loss, 
+
+Train Epoch: 12, loss: 0.50163
+Validation. Epoch: 12, loss: 0.3022, accuracy: 0.2850
+New best Loss, 
+
+Train Epoch: 13, loss: 0.45837
+Validation. Epoch: 13, loss: 0.2959, accuracy: 0.2850
+New best Loss, 
+
+Train Epoch: 14, loss: 0.42724
+Validation. Epoch: 14, loss: 0.2915, accuracy: 0.3210
+New best Loss, 
+
+Train Epoch: 15, loss: 0.40954
+Validation. Epoch: 15, loss: 0.2771, accuracy: 0.2630
+New best Loss, 
+
+Train Epoch: 16, loss: 0.38409
+Validation. Epoch: 16, loss: 0.2701, accuracy: 0.3290
+New best Loss, 
+
+Train Epoch: 17, loss: 0.36285
+Validation. Epoch: 17, loss: 0.2720, accuracy: 0.3120
+
+
+Train Epoch: 18, loss: 0.34716
+Validation. Epoch: 18, loss: 0.2642, accuracy: 0.3300
+New best Loss, 
+
+Train Epoch: 19, loss: 0.34031
+Validation. Epoch: 19, loss: 0.2567, accuracy: 0.3050
+New best Loss, 
+
+Train Epoch: 20, loss: 0.33375
+Validation. Epoch: 20, loss: 0.2563, accuracy: 0.3300
+New best Loss, 
+
+Train Epoch: 21, loss: 0.31836
+Validation. Epoch: 21, loss: 0.2519, accuracy: 0.3160
+New best Loss, 
+
+Train Epoch: 22, loss: 0.30914
+Validation. Epoch: 22, loss: 0.2465, accuracy: 0.3340
+New best Loss, 
+
+Train Epoch: 23, loss: 0.29940
+Validation. Epoch: 23, loss: 0.2479, accuracy: 0.3170
+
+
+Train Epoch: 24, loss: 0.29373
+Validation. Epoch: 24, loss: 0.2474, accuracy: 0.3390
+
+
+Train Epoch: 25, loss: 0.29151
+Validation. Epoch: 25, loss: 0.2415, accuracy: 0.3270
+New best Loss, 
+
+Train Epoch: 26, loss: 0.28674
+Validation. Epoch: 26, loss: 0.2408, accuracy: 0.3370
+New best Loss, 
+
+Train Epoch: 27, loss: 0.27666
+Validation. Epoch: 27, loss: 0.2428, accuracy: 0.3370
+
+
+Train Epoch: 28, loss: 0.28145
+Validation. Epoch: 28, loss: 0.2343, accuracy: 0.3220
+New best Loss, 
+
+Train Epoch: 29, loss: 0.26770
+Validation. Epoch: 29, loss: 0.2381, accuracy: 0.3360
+
+
+Train Epoch: 30, loss: 0.27073
+Validation. Epoch: 30, loss: 0.2347, accuracy: 0.3370
+
+
+Train Epoch: 31, loss: 0.26172
+Validation. Epoch: 31, loss: 0.2378, accuracy: 0.3270
+
+
+Train Epoch: 32, loss: 0.25723
+Validation. Epoch: 32, loss: 0.2381, accuracy: 0.3020
+
+
+Train Epoch: 33, loss: 0.25586
+Validation. Epoch: 33, loss: 0.2342, accuracy: 0.3480
+New best Loss, 
+
+Train Epoch: 34, loss: 0.25449
+Validation. Epoch: 34, loss: 0.2311, accuracy: 0.3300
+New best Loss, 
+
+Train Epoch: 35, loss: 0.24508
+Validation. Epoch: 35, loss: 0.2312, accuracy: 0.3280
+
+
+Train Epoch: 36, loss: 0.24285
+Validation. Epoch: 36, loss: 0.2255, accuracy: 0.3190
+New best Loss, 
+
+Train Epoch: 37, loss: 0.24307
+Validation. Epoch: 37, loss: 0.2327, accuracy: 0.3160
+
+
+Train Epoch: 38, loss: 0.23959
+Validation. Epoch: 38, loss: 0.2246, accuracy: 0.3440
+New best Loss, 
+
+Train Epoch: 39, loss: 0.23288
+Validation. Epoch: 39, loss: 0.2294, accuracy: 0.3330
+
+
+Train Epoch: 40, loss: 0.22951
+Validation. Epoch: 40, loss: 0.2235, accuracy: 0.3270
+New best Loss, 
+
+Train Epoch: 41, loss: 0.22889
+Validation. Epoch: 41, loss: 0.2256, accuracy: 0.3090
+
+
+Train Epoch: 42, loss: 0.22578
+Validation. Epoch: 42, loss: 0.2236, accuracy: 0.3410
+
+
+Train Epoch: 43, loss: 0.22779
+Validation. Epoch: 43, loss: 0.2244, accuracy: 0.3290
+
+
+Train Epoch: 44, loss: 0.22376
+Validation. Epoch: 44, loss: 0.2235, accuracy: 0.3300
+New best Loss, 
+
+Train Epoch: 45, loss: 0.22158
+Validation. Epoch: 45, loss: 0.2247, accuracy: 0.3510
+
+
+Train Epoch: 46, loss: 0.21983
+Validation. Epoch: 46, loss: 0.2264, accuracy: 0.2890
+
+
+Train Epoch: 47, loss: 0.22356
+Validation. Epoch: 47, loss: 0.2260, accuracy: 0.3300
+
+
+Train Epoch: 48, loss: 0.21196
+Validation. Epoch: 48, loss: 0.2232, accuracy: 0.3310
+New best Loss, 
+
+Train Epoch: 49, loss: 0.21814
+Validation. Epoch: 49, loss: 0.2222, accuracy: 0.3030
+New best Loss, 
+
+Train Epoch: 50, loss: 0.20906
+Validation. Epoch: 50, loss: 0.2205, accuracy: 0.3470
+New best Loss, 
+
+Train Epoch: 51, loss: 0.21071
+Validation. Epoch: 51, loss: 0.2205, accuracy: 0.3380
+New best Loss, 
+
+Train Epoch: 52, loss: 0.20907
+Validation. Epoch: 52, loss: 0.2253, accuracy: 0.3060
+
+
+Train Epoch: 53, loss: 0.21157
+Validation. Epoch: 53, loss: 0.2185, accuracy: 0.3460
+New best Loss, 
+
+Train Epoch: 54, loss: 0.20569
+Validation. Epoch: 54, loss: 0.2214, accuracy: 0.3330
+
+
+Train Epoch: 55, loss: 0.20784
+Validation. Epoch: 55, loss: 0.2191, accuracy: 0.3330
+
+
+Train Epoch: 56, loss: 0.20875
+Validation. Epoch: 56, loss: 0.2218, accuracy: 0.3430
+
+
+Train Epoch: 57, loss: 0.20099
+Validation. Epoch: 57, loss: 0.2230, accuracy: 0.3070
+
+
+Train Epoch: 58, loss: 0.20515
+Validation. Epoch: 58, loss: 0.2177, accuracy: 0.3050
+New best Loss, 
+
+Train Epoch: 59, loss: 0.19924
+Validation. Epoch: 59, loss: 0.2234, accuracy: 0.3550
+
+
+Train Epoch: 60, loss: 0.19809
+Validation. Epoch: 60, loss: 0.2202, accuracy: 0.3190
+
+
+Train Epoch: 61, loss: 0.19071
+Validation. Epoch: 61, loss: 0.2225, accuracy: 0.3680
+
+
+Train Epoch: 62, loss: 0.19592
+Validation. Epoch: 62, loss: 0.2202, accuracy: 0.3080
+
+
+Train Epoch: 63, loss: 0.19104
+Validation. Epoch: 63, loss: 0.2207, accuracy: 0.3450
+
+
+Train Epoch: 64, loss: 0.19422
+Validation. Epoch: 64, loss: 0.2175, accuracy: 0.3230
+New best Loss, 
+
+Train Epoch: 65, loss: 0.19048
+Validation. Epoch: 65, loss: 0.2189, accuracy: 0.3250
+
+
+Train Epoch: 66, loss: 0.19057
+Validation. Epoch: 66, loss: 0.2185, accuracy: 0.3140
+
+
+Train Epoch: 67, loss: 0.20009
+Validation. Epoch: 67, loss: 0.2203, accuracy: 0.3560
+
+
+Train Epoch: 68, loss: 0.19099
+Validation. Epoch: 68, loss: 0.2190, accuracy: 0.3290
+
+
+Train Epoch: 69, loss: 0.19442
+Validation. Epoch: 69, loss: 0.2248, accuracy: 0.3040
+
+
+Train Epoch: 70, loss: 0.18717
+Validation. Epoch: 70, loss: 0.2195, accuracy: 0.3270
+
+
+Train Epoch: 71, loss: 0.18584
+Validation. Epoch: 71, loss: 0.2251, accuracy: 0.3170
+
+
+Train Epoch: 72, loss: 0.18533
+Validation. Epoch: 72, loss: 0.2200, accuracy: 0.3330
+
+
+Train Epoch: 73, loss: 0.18403
+Validation. Epoch: 73, loss: 0.2160, accuracy: 0.3270
+New best Loss, 
+
+Train Epoch: 74, loss: 0.18309
+Validation. Epoch: 74, loss: 0.2216, accuracy: 0.3260
+
+
+Train Epoch: 75, loss: 0.17970
+Validation. Epoch: 75, loss: 0.2191, accuracy: 0.3360
+
+
+Train Epoch: 76, loss: 0.17763
+Validation. Epoch: 76, loss: 0.2181, accuracy: 0.3230
+
+
+Train Epoch: 77, loss: 0.17332
+Validation. Epoch: 77, loss: 0.2187, accuracy: 0.3120
+
+
+Train Epoch: 78, loss: 0.17202
+Validation. Epoch: 78, loss: 0.2204, accuracy: 0.3260
+
+
+Train Epoch: 79, loss: 0.17753
+Validation. Epoch: 79, loss: 0.2210, accuracy: 0.3050
+
+
+Train Epoch: 80, loss: 0.16650
+Validation. Epoch: 80, loss: 0.2214, accuracy: 0.3320
+
+
+Train Epoch: 81, loss: 0.17091
+Validation. Epoch: 81, loss: 0.2218, accuracy: 0.3290
+
+
+Train Epoch: 82, loss: 0.17010
+Validation. Epoch: 82, loss: 0.2220, accuracy: 0.3200
+
+
+Train Epoch: 83, loss: 0.16681
+Validation. Epoch: 83, loss: 0.2246, accuracy: 0.2990
+
+
+Train Epoch: 84, loss: 0.16696
+Validation. Epoch: 84, loss: 0.2237, accuracy: 0.3090
+
+
+Train Epoch: 85, loss: 0.16918
+Validation. Epoch: 85, loss: 0.2214, accuracy: 0.3120
+
+
+Train Epoch: 86, loss: 0.16350
+Validation. Epoch: 86, loss: 0.2286, accuracy: 0.3110
+
+
+Train Epoch: 87, loss: 0.16832
+Validation. Epoch: 87, loss: 0.2188, accuracy: 0.3470
+
+
+Train Epoch: 88, loss: 0.16933
+Validation. Epoch: 88, loss: 0.2260, accuracy: 0.2940
+
+
+Train Epoch: 89, loss: 0.17016
+Validation. Epoch: 89, loss: 0.2223, accuracy: 0.3140
+
+
+Train Epoch: 90, loss: 0.16081
+Validation. Epoch: 90, loss: 0.2248, accuracy: 0.3220
+
+
+Train Epoch: 91, loss: 0.16614
+Validation. Epoch: 91, loss: 0.2271, accuracy: 0.2880
+
+
+Train Epoch: 92, loss: 0.16137
+Validation. Epoch: 92, loss: 0.2225, accuracy: 0.3500
+
+
+Train Epoch: 93, loss: 0.15650
+Validation. Epoch: 93, loss: 0.2252, accuracy: 0.3190
+
+
+Train Epoch: 94, loss: 0.15558
+Validation. Epoch: 94, loss: 0.2236, accuracy: 0.3090
+
+
+Train Epoch: 95, loss: 0.15785
+Validation. Epoch: 95, loss: 0.2244, accuracy: 0.3280
+
+
+Train Epoch: 96, loss: 0.16139
+Validation. Epoch: 96, loss: 0.2252, accuracy: 0.2920
+
+
+Train Epoch: 97, loss: 0.15539
+Validation. Epoch: 97, loss: 0.2284, accuracy: 0.3330
+
+
+
+Process finished with exit code -1
