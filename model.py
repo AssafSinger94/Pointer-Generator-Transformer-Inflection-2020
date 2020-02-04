@@ -99,23 +99,16 @@ class TransformerModel(nn.Module):
             device = src.device
             # Create source mask if no appropriate one was created yet, created of size (S, S)
             if self.src_mask is None or self.src_mask.size(0) != len(src):
-                src_mask = self._generate_square_subsequent_mask(src.shape[1]).to(device)
-                self.src_mask = src_mask
+                self.src_mask = self._generate_square_subsequent_mask(src.shape[1]).to(device)
             # Create target mask if no appropriate one was created yet, created of size (T, T)
             if self.tgt_mask is None or self.tgt_mask.size(0) != len(tgt):
-                tgt_mask = self._generate_square_subsequent_mask(tgt.shape[1]).to(device)
-                self.tgt_mask = tgt_mask
+                self.tgt_mask = self._generate_square_subsequent_mask(tgt.shape[1]).to(device)
             # Create memory mask if no appropriate one was created yet, created of size (T, S)
-            mem_mask = self._generate_subsequent_mask(src.shape[1], tgt.shape[1]).to(device)
-            self.mem_mask = mem_mask
+            self.mem_mask = self._generate_subsequent_mask(src.shape[1], tgt.shape[1]).to(device)
         else:
             self.src_mask = None
             self.tgt_mask = None
             self.mem_mask = None
-
-        # print(self.src_mask.shape)
-        # print(self.tgt_mask.shape)
-        # print(self.mem_mask.shape)
 
         # Source embedding and positional encoding, changes dimension from (N, S) to (N, S, E) to (S, N, E)
         src_embed = self.src_embedding(src).permute(1, 0, 2) * math.sqrt(self.embedding_dim)
