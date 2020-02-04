@@ -6,6 +6,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 
 import data
+from data import DATA_FOLDER
 import tokenizer
 import model
 
@@ -133,9 +134,9 @@ def evaluate_validation(input_ids, target_ids, max_seq_len=MAX_SEQ_LEN):
 if __name__ == '__main__':
     # Get location of current folder, to work with full file paths
     __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-    valid_file_path = os.path.join(__location__, args.valid_file)
+    valid_file_path = os.path.join(__location__, DATA_FOLDER, args.valid_file)
     # Get vocabulary paths
-    vocab_file_path = os.path.join(__location__, args.vocab_file)
+    vocab_file_path = os.path.join(__location__, DATA_FOLDER, args.vocab_file)
     input_vocab_file_path = vocab_file_path + "-input"
     output_vocab_file_path = vocab_file_path + "-output"
     # Initialize tokenizer object with input and output vocabulary files

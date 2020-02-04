@@ -10,6 +10,7 @@ import torch.optim as optim
 import dataset
 import tokenizer
 import model
+from data import DATA_FOLDER
 
 """ CONSTANTS """
 PAD_ID = 2
@@ -107,10 +108,10 @@ def validation(epoch, data_loader):
 if __name__ == '__main__':
     # Get location of current folder, to work with full file paths
     __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-    train_file_path = os.path.join(__location__, args.train_file)
-    valid_file_path = os.path.join(__location__, args.valid_file)
+    train_file_path = os.path.join(__location__, DATA_FOLDER, args.train_file)
+    valid_file_path = os.path.join(__location__, DATA_FOLDER, args.valid_file)
     # Get vocabulary paths
-    vocab_file_path = os.path.join(__location__, args.vocab_file)
+    vocab_file_path = os.path.join(__location__, DATA_FOLDER, args.vocab_file)
     input_vocab_file_path = vocab_file_path + "-input"
     output_vocab_file_path = vocab_file_path + "-output"
     # Initialize Tokenizer object with input and output vocabulary files

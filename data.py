@@ -7,6 +7,7 @@ Reads conll file, and 1) Splits it by different components of each examples, and
 conll: lemma-tab-target-tab-features
 """
 
+DATA_FOLDER = 'data'
 
 def read_morph_file(morph_file_path):
 	""" Reads conll file, split to line, and splits each line by tabs. Returns list of lists"""
