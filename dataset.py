@@ -10,7 +10,7 @@ def get_train_dataset(train_file_path, tokenizer, max_seq_len=25):
     # Read dataset file, and get input tokens and output tokens from file
     inputs_tokens, outputs_tokens = data.read_train_file_tokens(train_file_path)
     # Pad target with sos and eos symbols
-    inputs_tokens = tokenizer.add_sequence_symbols(inputs_tokens)
+    # inputs_tokens = tokenizer.add_sequence_symbols(inputs_tokens)
     outputs_tokens = tokenizer.add_sequence_symbols(outputs_tokens)
     # Split target into two targets, for teacher forcing
     targets_tokens = [target_tokens[:-1] for target_tokens in outputs_tokens]
