@@ -1,5 +1,4 @@
 from random import shuffle
-
 import torch
 
 import data
@@ -47,6 +46,7 @@ def get_valid_dataset(valid_file_path, tokenizer, device, max_seq_len):
     outputs_ids = tokenizer.get_id_tensors(outputs_tokens, device, "OUTPUT")
 
     return inputs_ids, outputs_ids
+
 
 
 def get_test_dataset(test_file_path, tokenizer):

@@ -1,11 +1,11 @@
 import argparse
 import os
 import torch
-import torch.nn as nn
+# import torch.nn as nn
 import torch.nn.functional as F
-import torch.optim as optim
+# import torch.optim as optim
 
-import data
+import dataset
 from data import DATA_FOLDER
 import tokenizer
 import model
@@ -22,64 +22,46 @@ parser.add_argument('--outfile', type=str, default='gtsrb_kaggle.csv', metavar='
                     help="name of the output csv file")
 args = parser.parse_args()
 
+
+# Get train and validation file paths
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+train_file_path = os.path.join(__location__, DATA_FOLDER, args.train_file)
+valid_file_path = os.path.join(__location__, DATA_FOLDER, args.valid_file)
+# Get vocabulary paths
+input_vocab_file_path = os.path.join(__location__, DATA_FOLDER, args.vocab_file + "-input")
+output_vocab_file_path = os.path.join(__location__, DATA_FOLDER, args.vocab_file + "-output")
+# Initialize Tokenizer object with input and output vocabulary files
+myTokenizer = tokenizer.Tokenizer(input_vocab_file_path, output_vocab_file_path)
+
+""" CONSTANTS """
+# MAX_INPUT_SEQ_LEN = 25
+# MAX_OUTPUT_SEQ_LEN = 25
+# SRC_VOCAB_SIZE = myTokenizer.get_input_vocab_size()
+# TGT_VOCAB_SIZE = myTokenizer.get_output_vocab_size()
+MAX_SEQ_LEN = 25
+
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 # Load model from checkpoint
 model = torch.load(args.model)
 model.eval()
 
-MAX_SEQ_LEN = 25
-PAD_ID = 2
+# Initialize DataLoader object
+data_loader = dataset.DataLoader(myTokenizer, train_file_path, valid_file_path, device)
 
 
-def get_test_dataset(test_file_path, tokenizer):
-    """ Reads entire dataset file, tokenizes it, and converts all tokens to ids using given tokenizer object """
-    # Read dataset file, and get input tokens and output tokens from file
-    inputs_tokens = data.read_test_file_tokens(test_file_path)
-    # Get tensors of all input ids and output ids
-    inputs_ids = tokenizer.get_id_tensors(inputs_tokens, device, "INPUT")
-    return inputs_ids
-
-
-def get_valid_dataset(valid_file_path, tokenizer):
-    """ Reads entire dataset file, tokenizes it, and converts all tokens to ids using given tokenizer object """
-    # Read dataset file, and get input tokens and output tokens from file
-    inputs_tokens, outputs_tokens = data.read_train_file_tokens(valid_file_path)
-    # Pad target with sos and eos symbols
-    outputs_tokens = tokenizer.add_sequence_symbols(outputs_tokens)
-    # Pad with padding
-    inputs_tokens = [tokenizer.pad_tokens_sequence(input_tokens, MAX_SEQ_LEN) for
-                     input_tokens in inputs_tokens]
-    outputs_tokens = [output_tokens for
-                      output_tokens in outputs_tokens]
-
-    inputs_ids = tokenizer.get_id_tensors(inputs_tokens, device, "INPUT")
-    outputs_ids = tokenizer.get_id_tensors(outputs_tokens, device, "OUTPUT")
-
-    return inputs_ids, outputs_ids
-
-
-def get_padding_masks(data_batch, target_batch):
-    """" Returns padding masks for entire dataset.
-        inputs are of size batch_size x seq_len
-        Returns masks of same size- batch_size x seq_len """
-    pad_token_id = PAD_ID
-    # Get lists of all input ids, target ids and target_y ids, where each sequence padded up to max length
-    src_padding_mask = (data_batch == pad_token_id)
-    mem_padding_mask = src_padding_mask
-    target_padding_mask = (target_batch == pad_token_id)
-    return src_padding_mask, mem_padding_mask, target_padding_mask
-
-
-def evaluate_validation(input_ids, target_ids, max_seq_len=MAX_SEQ_LEN):
+def evaluate_validation(max_seq_len=MAX_SEQ_LEN):
     """ Runs full validation epoch over the dataset
 	CHECK EACH TO MAKE input_ids, target_ids GLOBAL"""
+    input_ids, target_ids = data_loader.get_validation_set()
+
     correct = 0
+
     # Go over each example
     for i, (data, target) in enumerate(zip(input_ids, target_ids)):
         # Add batch dimension
         data = data.unsqueeze(dim=0)
-        src_pad_mask, mem_pad_mask, target_pad_mask = get_padding_masks(data, target.unsqueeze(dim=0))
+        src_pad_mask, mem_pad_mask, target_pad_mask = data_loader.get_padding_masks(data, target.unsqueeze(dim=0))
         outputs = torch.zeros(1, max_seq_len, dtype=torch.long, device=device)
         outputs[0] = tokenizer.sos_id
         for j in range(1, max_seq_len):
@@ -132,30 +114,10 @@ def evaluate_validation(input_ids, target_ids, max_seq_len=MAX_SEQ_LEN):
 
 
 if __name__ == '__main__':
-    # Get location of current folder, to work with full file paths
-    __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-    valid_file_path = os.path.join(__location__, DATA_FOLDER, args.valid_file)
-    # Get vocabulary paths
-    vocab_file_path = os.path.join(__location__, DATA_FOLDER, args.vocab_file)
-    input_vocab_file_path = vocab_file_path + "-input"
-    output_vocab_file_path = vocab_file_path + "-output"
-    # Initialize tokenizer object with input and output vocabulary files
-    tokenizer = tokenizer.Tokenizer(input_vocab_file_path, output_vocab_file_path)
     # Get test set
-    valid_input_ids, valid_target_ids = get_valid_dataset(valid_file_path, tokenizer)
+    # valid_input_ids, valid_target_ids = get_valid_dataset(valid_file_path, tokenizer)
     # --------
     # print(test_input_ids[0], test_target_ids[0])
     # --------
 
-    evaluate_validation(valid_input_ids, valid_target_ids)
-
-# def get_valid_dataset(valid_file_path, tokenizer):
-#     """ Reads entire dataset file, tokenizes it, and converts all tokens to ids using given tokenizer object """
-#     # Read dataset file, and get input tokens and output tokens from file
-#     inputs_tokens, outputs_tokens = data.read_train_file_tokens(valid_file_path)
-#     # Pad target with sos and eos symbols
-#     outputs_tokens = tokenizer.add_sequence_symbols(outputs_tokens)
-#     # Get tensors of all input ids and output ids
-#     inputs_ids = tokenizer.get_id_tensors(inputs_tokens, device, "INPUT")
-#     output_ids = tokenizer.get_id_tensors(outputs_tokens, device, "OUTPUT")
-#     return inputs_ids, output_ids
+    evaluate_validation()

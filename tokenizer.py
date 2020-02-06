@@ -36,7 +36,7 @@ def tokenize_words(word_list):
 
 
 def tokenize_features(features_list):
-    """Splits features by the seperator sign ";" """
+    """Splits features by the separator sign ";" """
     return [connected_features.split(";") for connected_features in features_list]
 
 
@@ -70,6 +70,10 @@ class Tokenizer(object):
         """ Converts all given ids to tokens using the input vocabulary"""
         return convert_by_vocab(self.inv_input_vocab, ids)
 
+    def get_input_vocab_size(self):
+        """ Returns size of input vocabulary """
+        return len(self.input_vocab)
+
     def convert_output_tokens_to_ids(self, tokens):
         """ Converts all given tokens to the ids using the output vocabulary"""
         return convert_by_vocab(self.output_vocab, tokens)
@@ -77,6 +81,10 @@ class Tokenizer(object):
     def convert_output_ids_to_tokens(self, ids):
         """ Converts all given tokens to the ids using the output vocabulary"""
         return convert_by_vocab(self.inv_output_vocab, ids)
+
+    def get_output_vocab_size(self):
+        """ Returns size of output vocabulary """
+        return len(self.output_vocab)
 
     def get_id_tensors(self, tokens_list, device, vocab_type):
         """ Gets list of token sequences, and converts each token sequence to tensor of ids, using the tokenizer
