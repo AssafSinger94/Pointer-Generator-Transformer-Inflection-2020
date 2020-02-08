@@ -10,10 +10,9 @@ from torch.nn import TransformerEncoder, TransformerEncoderLayer
 class TransformerModel(nn.Module):
     def __init__(self, src_vocab_size, tgt_vocab_size, embedding_dim, fcn_hidden_dim, num_heads, num_layers, dropout=0.1):
         super(TransformerModel, self).__init__()
-        self.embedding_dim = embedding_dim
 
+        self.embedding_dim = embedding_dim
         # Source and Encoder layers
-        # self.src_embed = nn.Embedding(src_vocab_size, embedding_dim, padding_idx=2)
         self.src_embed = Embedding(src_vocab_size, embedding_dim, padding_idx=2)
         self.src_pos_encoder = PositionalEncoding(embedding_dim)
         self.encoder_layer = TransformerEncoderLayer(embedding_dim, num_heads, fcn_hidden_dim, dropout)
@@ -21,13 +20,11 @@ class TransformerModel(nn.Module):
         self.encoder = TransformerEncoder(self.encoder_layer, num_layers, encoder_norm)
 
         # Target and Decoder layers
-        # self.tgt_embed = nn.Embedding(tgt_vocab_size, embedding_dim, padding_idx=2)
         self.tgt_embed = Embedding(tgt_vocab_size, embedding_dim, padding_idx=2)
         self.tgt_pos_encoder = PositionalEncoding(embedding_dim)
         self.decoder_layer = nn.TransformerDecoderLayer(embedding_dim, num_heads, fcn_hidden_dim, dropout)
         decoder_norm = nn.LayerNorm(embedding_dim)
         self.decoder = nn.TransformerDecoder(self.decoder_layer, num_layers, decoder_norm)
-
         # Final linear layer
         self.out = nn.Linear(embedding_dim, tgt_vocab_size)
 
@@ -98,29 +95,20 @@ class TransformerModel(nn.Module):
 		Examples:
 			output = transformer_model(src, tgt, src_mask=src_mask, tgt_mask=tgt_mask)
 		"""
-        # Create masks for transformer
+        # Create target mask for transformer if no appropriate one was created yet, created of size (T, T)
         if has_mask:
-            device = src.device
-            # Create source mask if no appropriate one was created yet, created of size (S, S)
-            if self.src_mask is None or self.src_mask.size(0) != len(src):
-                self.src_mask = self._generate_square_subsequent_mask(src.shape[1]).to(device)
-            # Create target mask if no appropriate one was created yet, created of size (T, T)
-            if self.tgt_mask is None or self.tgt_mask.size(0) != len(tgt):
-                self.tgt_mask = self._generate_square_subsequent_mask(tgt.shape[1]).to(device)
-            # Create memory mask if no appropriate one was created yet, created of size (T, S)
-            self.mem_mask = self._generate_subsequent_mask(src.shape[1], tgt.shape[1]).to(device)
+            if self.tgt_mask is None or self.tgt_mask.size(0) != tgt.size(1):
+                self.tgt_mask = self._generate_square_subsequent_mask(tgt.size(1)).to(src.device)
         else:
-            self.src_mask = None
             self.tgt_mask = None
-            self.mem_mask = None
 
-        # Source embedding and positional encoding, changes dimension from (N, S) to (N, S, E) to (S, N, E)
-        src_embed = self.src_embed(src).permute(1, 0, 2)# * math.sqrt(self.embedding_dim)
+        # Source embedding and positional encoding, changes dimension (N, S) -> (N, S, E) -> (S, N, E)
+        src_embed = self.src_embed(src).transpose(0, 1)
         src_embed = self.src_pos_encoder(src_embed)
         # Pass the source to the encoder
         memory = self.encoder(src_embed, mask=self.src_mask, src_key_padding_mask=src_key_padding_mask)
-        # Target embedding and positional encoding, changes dimension from (N, T) to (N, T, E) to (T, N, E)
-        tgt_embed = self.tgt_embed(tgt).permute(1, 0, 2)# * math.sqrt(self.embedding_dim)
+        # Target embedding and positional encoding, changes dimension (N, T) -> (N, T, E) -> (T, N, E)
+        tgt_embed = self.tgt_embed(tgt).transpose(0, 1)
         tgt_embed = self.tgt_pos_encoder(tgt_embed)
         # Get output of decoder. Dimensions stay the same
         decoder_output = self.decoder(tgt_embed, memory, tgt_mask=self.tgt_mask, memory_mask=self.mem_mask,
@@ -129,12 +117,13 @@ class TransformerModel(nn.Module):
         # Add linear layer (log softmax is added in Cross Entropy Loss), (T, N, E) -> (T, N, tgt_vocab_size)
         output = self.out(decoder_output)
         # Change back batch and sequence dimensions, from (T, N, tgt_vocab_size) -> (N, T, tgt_vocab_size)
-        return output.permute(1, 0, 2)
+        return output.transpose(0, 1)
 
 
 class PositionalEncoding(nn.Module):
-
-    def __init__(self, embedding_dim, dropout=0.1, max_seq_len=100):
+    """ Adds positional encoding to sequences """
+    def __init__(self, embedding_dim, dropout=0.1, max_seq_len=25):
+        """ Initializes a seq_len x 1 x embedding_dim positional encoding matrix"""
         super(PositionalEncoding, self).__init__()
         self.dropout = nn.Dropout(p=dropout)
 
@@ -147,6 +136,9 @@ class PositionalEncoding(nn.Module):
         self.register_buffer('pe', pe)
 
     def forward(self, x):
+        """ Adds positional encoding to the input.
+            Input of dimensions (seq_len x batch_sz x embedding_dim).
+            Adds positional encoding matrix (seq_len x 1 x embedding_dim) to every individual example in batch """
         x = x + self.pe[:x.size(0), :]
         return self.dropout(x)
 

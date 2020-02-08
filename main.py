@@ -13,7 +13,7 @@ import model
 from data import DATA_FOLDER
 
 # Training settings
-parser = argparse.ArgumentParser(description='Transformer for morphological inflection')
+parser = argparse.ArgumentParser(description='Training Transformer for morphological inflection')
 parser.add_argument('--epochs', type=int, default=100, metavar='N',
                     help='number of epochs to train (default: 10)')
 parser.add_argument('--lr', type=float, default=5e-4, metavar='LR',
@@ -56,7 +56,6 @@ DROPOUT = 0.2
 
 
 """ MODEL AND DATA LOADER """
-# Model
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model = model.TransformerModel(src_vocab_size=SRC_VOCAB_SIZE, tgt_vocab_size=TGT_VOCAB_SIZE, embedding_dim=EMBEDDING_DIM,
                                fcn_hidden_dim=FCN_HIDDEN_DIM, num_heads=NUM_HEADS, num_layers=NUM_LAYERS, dropout=DROPOUT)
@@ -64,7 +63,8 @@ model.to(device)
 criterion = nn.CrossEntropyLoss(reduction='mean', ignore_index=myTokenizer.pad_id)
 optimizer = optim.Adam(model.parameters(), lr=args.lr)
 # Initialize DataLoader object
-data_loader = dataset.DataLoader(myTokenizer, train_file_path, valid_file_path, device)
+data_loader = dataset.DataLoader(myTokenizer, train_file_path=train_file_path, valid_file_path=valid_file_path,
+                                 test_file_path=None, device=device)
 
 
 def train(epoch):
@@ -97,7 +97,7 @@ def validation(epoch):
     running_loss = 0.0
     correct_preds = 0
     # Get Training set in batches
-    input_ids_batches, target_ids_batches, target_y_ids_batches = data_loader.get_validation_set()
+    input_ids_batches, target_ids_batches, target_y_ids_batches = data_loader.get_validation_set_tf()
     # Go over each batch
     for i, (data, target, target_y) in enumerate(zip(input_ids_batches, target_ids_batches, target_y_ids_batches)):
         # Get padding masks
