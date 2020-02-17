@@ -44,7 +44,7 @@ def get_valid_dataset(valid_file_path, tokenizer, device):
     return inputs_ids, outputs_ids
 
 
-def get_test_dataset(test_file_path, tokenizer, device, max_seq_len=25):
+def get_test_dataset(test_file_path, tokenizer, device):
     """ Reads entire dataset file, tokenizes it, and converts all tokens to ids using given tokenizer object """
     # Read dataset file, and get input tokens and output tokens from file
     inputs_tokens = data.read_test_file_tokens(test_file_path)
@@ -83,12 +83,15 @@ def get_batches(input_ids, target_ids, target_y_ids, device, batch_size=128):
 
 class DataLoader(object):
     """ Contains all utilities for reading train/valid/test sets """
-    def __init__(self, tokenizer, train_file_path=None, valid_file_path=None, test_file_path=None, device="cpu"):
+    def __init__(self, tokenizer, train_file_path=None, valid_file_path=None, test_file_path=None,
+                 device="cpu", batch_size=128, max_seq_len=25):
         self.tokenizer = tokenizer
         self.device = device
+        self.batch_size = batch_size
+        self.max_seq_len = max_seq_len
         # Read train file and get train set
         if train_file_path is not None:
-            train_input_ids, train_target_ids, train_target_y_ids = get_train_dataset(train_file_path, tokenizer)
+            train_input_ids, train_target_ids, train_target_y_ids = get_train_dataset(train_file_path, tokenizer, self.max_seq_len)
             self.train_input_ids = train_input_ids
             self.train_target_ids = train_target_ids
             self.train_target_y_ids = train_target_y_ids
@@ -99,7 +102,7 @@ class DataLoader(object):
 
         if valid_file_path is not None:
             # Read validation file and get validation set, for checking loss using teacher forcing
-            valid_input_ids_tf, valid_target_ids_tf, valid_target_y_ids_tf = get_train_dataset(valid_file_path, tokenizer)
+            valid_input_ids_tf, valid_target_ids_tf, valid_target_y_ids_tf = get_train_dataset(valid_file_path, tokenizer, self.max_seq_len)
             self.valid_input_ids_tf = valid_input_ids_tf
             self.valid_target_ids_tf = valid_target_ids_tf
             self.valid_target_y_ids_tf = valid_target_y_ids_tf
@@ -123,11 +126,11 @@ class DataLoader(object):
 
     def get_train_set(self):
         return get_batches(self.train_input_ids, self.train_target_ids, self.train_target_y_ids,
-                           self.device, batch_size=128)
+                           self.device, batch_size=self.batch_size)
 
     def get_validation_set_tf(self):
         return get_batches(self.valid_input_ids_tf, self.valid_target_ids_tf, self.valid_target_y_ids_tf,
-                           self.device, batch_size=128)
+                           self.device, batch_size=self.batch_size)
 
     def get_validation_set(self):
         return self.valid_input_ids, self.valid_target_ids
@@ -153,13 +156,3 @@ class DataLoader(object):
         mem_padding_mask = src_padding_mask
         target_padding_mask = (target_batch == pad_token_id)
         return src_padding_mask, mem_padding_mask, target_padding_mask
-
-    # Pad with padding
-    # inputs_tokens = [tokenizer.pad_tokens_sequence(input_tokens, max_seq_len) for input_tokens in inputs_tokens]
-    # # Get indexes of all dataset examples in shuffled order
-    # indexes = [i for i in range(len(input_ids))]
-    # shuffle(indexes)
-    # # get new dataset values, in shuffled order
-    # shuffled_input_ids = [input_ids[i] for i in indexes]
-    # shuffled_target_ids = [target_ids[i] for i in indexes]
-    # shuffled_target_y_ids = [target_y_ids[i] for i in indexes]

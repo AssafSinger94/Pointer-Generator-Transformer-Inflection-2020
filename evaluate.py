@@ -28,18 +28,18 @@ def accuracy(predictions, targets):
     return correct_count / len(predictions)
 
 """Version with words NOT cleaned"""
-# def evaluate_predictions(pred_file, target_file):
-#     pred_lines = data.read_morph_file(pred_file)
-#     target_lines = data.read_morph_file(target_file)
-#     predictions = [line[1] for line in pred_lines]
-#     truth = [line[1] for line in target_lines]
-#     print("Test set. accuracy: %.4f" % accuracy(predictions, truth))
+def evaluate_predictions(pred_file, target_file):
+    pred_lines = data.read_morph_file(pred_file)
+    target_lines = data.read_morph_file(target_file)
+    predictions = [line[1] for line in pred_lines]
+    truth = [line[1] for line in target_lines]
+    print("Test set. accuracy: %.4f" % accuracy(predictions, truth))
 
 """Version with words cleaned"""
-def evaluate_predictions(pred_file, target_file):
-    _, predictions, _ = data.read_train_file(pred_file)
-    _, truth, _ = data.read_train_file(target_file)
-    print("Test set. accuracy: %.4f" % accuracy(predictions, truth))
+# def evaluate_predictions(pred_file, target_file):
+#     _, predictions, _ = data.read_train_file(pred_file)
+#     _, truth, _ = data.read_train_file(target_file)
+#     print("Test set. accuracy: %.4f" % accuracy(predictions, truth))
 
 
 if __name__ == '__main__':

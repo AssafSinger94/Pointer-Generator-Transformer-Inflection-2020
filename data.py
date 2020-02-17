@@ -41,9 +41,9 @@ def read_train_file(train_file_path):
 
     for lemma, target, feature in train_morph_list:
         # Add results to relevant lists
-        lemmas.append(clean_word(lemma))
+        lemmas.append(lemma.lower())#(clean_word(lemma))
         features.append(feature)
-        targets.append(clean_word(target))
+        targets.append(target.lower())#(clean_word(target))
 
     return lemmas, targets, features
 
@@ -56,7 +56,7 @@ def read_test_file(test_input_file):
 
     for lemma, feature in test_morph_list:
         # Add results to relevant lists
-        lemmas.append(clean_word(lemma))
+        lemmas.append(lemma.lower())#clean_word(lemma))
         features.append(feature)
 
     return lemmas, features

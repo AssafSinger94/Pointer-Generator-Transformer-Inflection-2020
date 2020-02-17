@@ -53,7 +53,7 @@ data_loader = dataset.DataLoader(myTokenizer, train_file_path=None, valid_file_p
 
 
 """ FUNCTIONS """
-def prdeict_word(data, max_seq_len, device):
+def prdeict_word(data, max_seq_len):
     # Add batch dimension
     data = data.unsqueeze(dim=0)
     outputs = torch.zeros(1, max_seq_len, dtype=torch.long, device=device)
@@ -84,7 +84,7 @@ def evaluate_validation(max_seq_len=MAX_SEQ_LEN):
     # Go over each example
     for i, (data, target) in enumerate(zip(input_ids, target_ids)):
         # Get prediction from model
-        pred = prdeict_word(data, max_seq_len, device)
+        pred = prdeict_word(data, max_seq_len)
         if torch.equal(pred, target) and torch.all(torch.eq(pred, target)):
             correct += 1
     print("Validation set: accuracy: %.3f" % (100 * correct / len(input_ids)))
@@ -98,7 +98,7 @@ def evaluate(max_seq_len=MAX_SEQ_LEN):
     # Go over each example
     for i, data in enumerate(input_ids):
         # Get prediction from model
-        pred = prdeict_word(data, max_seq_len, device)
+        pred = prdeict_word(data, max_seq_len)
         # Strip off sos and eos tokens, and convert from predicted ids to the predicted word
         pred_word = ''.join(myTokenizer.convert_output_ids_to_tokens(pred[1:-1].tolist()))
         predictions.append(pred_word)
@@ -107,40 +107,9 @@ def evaluate(max_seq_len=MAX_SEQ_LEN):
 
 if __name__ == '__main__':
     # Evaluate accuracy over validation set
-    # evaluate_validation()
+    evaluate_validation()
     # Generating predictions for test set
     evaluate()
-
-#     def translate(model, src, max_len=80, custom_string=False):
-#
-#         model.eval()
-#
-#     if custom_sentence == True:
-#         src = tokenize_en(src)
-#         sentence = \
-#             Variable(torch.LongTensor([[EN_TEXT.vocab.stoi[tok] for tok
-#                                         in sentence]])).cuda()
-#     src_mask = (src != input_pad).unsqueeze(-2)
-#     e_outputs = model.encoder(src, src_mask)
-#
-#     outputs = torch.zeros(max_len).type_as(src.data)
-#     outputs[0] = torch.LongTensor([FR_TEXT.vocab.stoi['<sos>']])
-#
-#
-# for i in range(1, max_len):
-#
-#     trg_mask = np.triu(np.ones((1, i, i),
-#                                k=1).astype('uint8')
-#     trg_mask = Variable(torch.from_numpy(trg_mask) == 0).cuda()
-#
-#     out = model.out(model.decoder(outputs[:i].unsqueeze(0),
-#                                   e_outputs, src_mask, trg_mask))
-#     out = F.softmax(out, dim=-1)
-#     val, ix = out[:, -1].data.topk(1)
-#
-#     outputs[i] = ix[0][0]
-#     if ix[0][0] == FR_TEXT.vocab.stoi['<eos>']:
-#         break
 
 # src_pad_mask, mem_pad_mask, target_pad_mask = data_loader.get_padding_masks(data, target.unsqueeze(dim=0))
 # out = model(data, outputs[:, :j],

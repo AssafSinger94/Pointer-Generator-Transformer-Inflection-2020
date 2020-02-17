@@ -24,8 +24,8 @@ parser.add_argument('--valid-file', type=str, default='data', metavar='S',
                     help="Validation file of the dataset")
 parser.add_argument('--vocab-file', type=str, default='data', metavar='S',
                     help="Base name of vocabulary files")
-# parser.add_argument('--batch-size', type=int, default=64, metavar='N',
-#                     help='input batch size for training (default: 64)')
+parser.add_argument('--batch-size', type=int, default=128, metavar='N',
+                    help='input batch size for training (default: 128)')
 # parser.add_argument('--plots-folder', type=str, default='plots', metavar='D',
 #                     help='how many batches to wait before logging training status')
 # parser.add_argument('--model-folder', type=str, default='model', metavar='D',
@@ -43,28 +43,35 @@ output_vocab_file_path = os.path.join(__location__, DATA_FOLDER, args.vocab_file
 myTokenizer = tokenizer.Tokenizer(input_vocab_file_path, output_vocab_file_path)
 
 """ CONSTANTS """
-MAX_INPUT_SEQ_LEN = 25
-MAX_OUTPUT_SEQ_LEN = 25
+MAX_SEQ_LEN = 25
 SRC_VOCAB_SIZE = myTokenizer.get_input_vocab_size()
 TGT_VOCAB_SIZE = myTokenizer.get_output_vocab_size()
 # Model Hyperparameters
+# BEST MODEL FOR MEDIUM RESOURCE
 EMBEDDING_DIM = 64
 FCN_HIDDEN_DIM = 256
 NUM_HEADS = 4
 NUM_LAYERS = 2
 DROPOUT = 0.2
-
+# # BEST MODEL FOR LOW RESOURCE
+# EMBEDDING_DIM = 128
+# FCN_HIDDEN_DIM = 64
+# NUM_HEADS = 4
+# NUM_LAYERS = 2
+# DROPOUT = 0.2
 
 """ MODEL AND DATA LOADER """
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-model = model.TransformerModel(src_vocab_size=SRC_VOCAB_SIZE, tgt_vocab_size=TGT_VOCAB_SIZE, embedding_dim=EMBEDDING_DIM,
-                               fcn_hidden_dim=FCN_HIDDEN_DIM, num_heads=NUM_HEADS, num_layers=NUM_LAYERS, dropout=DROPOUT)
+model = model.TransformerModel(src_vocab_size=SRC_VOCAB_SIZE, tgt_vocab_size=TGT_VOCAB_SIZE,
+                               embedding_dim=EMBEDDING_DIM,
+                               fcn_hidden_dim=FCN_HIDDEN_DIM, num_heads=NUM_HEADS, num_layers=NUM_LAYERS,
+                               dropout=DROPOUT)
 model.to(device)
 criterion = nn.CrossEntropyLoss(reduction='mean', ignore_index=myTokenizer.pad_id)
 optimizer = optim.Adam(model.parameters(), lr=args.lr)
 # Initialize DataLoader object
 data_loader = dataset.DataLoader(myTokenizer, train_file_path=train_file_path, valid_file_path=valid_file_path,
-                                 test_file_path=None, device=device)
+                                 test_file_path=None, device=device, batch_size=args.batch_size, max_seq_len=MAX_SEQ_LEN)
 
 
 def train(epoch):
@@ -105,15 +112,13 @@ def validation(epoch):
         # Compute output of model
         output = model(data, target, src_key_padding_mask=src_pad_mask, memory_key_padding_mask=mem_pad_mask,
                        tgt_key_padding_mask=target_pad_mask)
-        # ----------
+        # Compute accuracy
         # Get predictions
         predictions = F.softmax(output, dim=-1).topk(1)[1].squeeze()
-        # Compute accuracy
         for j in range(target_y.shape[0]):
             pad_start_idx = target_pad_mask[j].nonzero()[0]
             if torch.all(torch.eq(predictions[j, :pad_start_idx], target_y[j, :pad_start_idx])):
                 correct_preds += 1
-        # ----------
         # Compute loss over output
         loss = criterion(output.contiguous().view(-1, TGT_VOCAB_SIZE), target_y.contiguous().view(-1))
         running_loss += loss.item()
@@ -128,7 +133,8 @@ if __name__ == '__main__':
     # Initialize best validation loss placeholders
     best_valid_loss = sys.maxsize
     best_valid_epoch = 0
-    best_model_file = 'checkpoints/model_best.pth'
+    checkpoints_folder = 'checkpoints/'
+    best_model_file = '%smodel_best.pth' % checkpoints_folder
     for epoch in range(1, args.epochs + 1):
         print("\nTrain Epoch: %d started" % epoch)
         # Train model
@@ -136,7 +142,7 @@ if __name__ == '__main__':
         # Check model on validation set and get loss
         curr_valid_loss = validation(epoch)
         # Save model with epoch number
-        model_file = "checkpoints/model_%d.pth" % epoch
+        model_file = "%smodel_%d.pth" % (checkpoints_folder, epoch)
         torch.save(model, model_file)
         print('Saved model to', model_file)
         # If best model so far, save model as best and the loss values
@@ -145,5 +151,10 @@ if __name__ == '__main__':
             best_valid_epoch = epoch
             shutil.copyfile(model_file, best_model_file)
             print("New best Loss, saved to %s" % best_model_file)
+
+    # remove unnecessary model files (disk quota limit)
+    for filename in sorted(os.listdir(checkpoints_folder)):
+        if os.path.isfile(filename) and ("best" not in filename):
+            os.remove(os.path.join(checkpoints_folder, filename))
 
     print('\nFinished training, best model on validation set: ', best_valid_epoch)

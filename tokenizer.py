@@ -3,7 +3,7 @@ import collections
 import torch
 
 
-def load_vocab(vocab_file_path, sos, eos, pad):
+def load_vocab(vocab_file_path, sos, eos, pad, unk):
     """ Loads vocabulary from vocabulary file (create by vocabulary.py)"""
     vocab_file = open(vocab_file_path, "r+", encoding='utf-8')
     lines = vocab_file.readlines()
@@ -13,20 +13,22 @@ def load_vocab(vocab_file_path, sos, eos, pad):
     vocab[sos] = 0
     vocab[eos] = 1
     vocab[pad] = 2
+    vocab[unk] = 3
     # For each valid line, Get token and index of line
     for index, line in enumerate(lines):
         if line != "\n":
             token, count = line.replace("\n", "").split("\t")
-            vocab[token] = index + 3  # first two values of vocabulary are taken
+            vocab[token] = index + 4  # first two values of vocabulary are taken
 
     return vocab
 
 
-def convert_by_vocab(vocab, items):
-    """Converts a sequence of tokens or ids using the given vocabulary."""
+def convert_by_vocab(vocab, items, unk_val):
+    """Converts a sequence of tokens or ids using the given vocabulary.
+        If token is not in vocabulary, unk_val is return as default. """
     output = []
     for item in items:
-        output.append(vocab[item])
+        output.append(vocab.get(item, unk_val))
     return output
 
 
@@ -47,15 +49,17 @@ class Tokenizer(object):
         self.sos = "<s>"
         self.eos = "</s>"
         self.pad = "<pad>"
+        self.unk = "<unk>"
         self.sos_id = 0
         self.eos_id = 1
         self.pad_id = 2
+        self.unk_id = 3
 
         self.input_vocab = load_vocab(input_vocab_file_path, self.sos,
-                                      self.eos, self.pad)  # vocabulary of all token->id in the input
+                                      self.eos, self.pad, self.unk)  # vocabulary of all token->id in the input
         self.inv_input_vocab = {v: k for k, v in self.input_vocab.items()}  # reverse vocabulary of input, id->token
         self.output_vocab = load_vocab(output_vocab_file_path, self.sos,
-                                       self.eos, self.pad)  # vocabulary of all token->id in the output
+                                       self.eos, self.pad, self.unk)  # vocabulary of all token->id in the output
         self.inv_output_vocab = {v: k for k, v in self.output_vocab.items()}  # reverse vocabulary of output, id->token
 
     def add_sequence_symbols(self, tokens_list):
@@ -64,11 +68,11 @@ class Tokenizer(object):
 
     def convert_input_tokens_to_ids(self, tokens):
         """ Converts all given tokens to ids using the input vocabulary"""
-        return convert_by_vocab(self.input_vocab, tokens)
+        return convert_by_vocab(self.input_vocab, tokens, self.unk_id)
 
     def convert_input_ids_to_tokens(self, ids):
         """ Converts all given ids to tokens using the input vocabulary"""
-        return convert_by_vocab(self.inv_input_vocab, ids)
+        return convert_by_vocab(self.inv_input_vocab, ids, self.unk)
 
     def get_input_vocab_size(self):
         """ Returns size of input vocabulary """
@@ -76,11 +80,11 @@ class Tokenizer(object):
 
     def convert_output_tokens_to_ids(self, tokens):
         """ Converts all given tokens to the ids using the output vocabulary"""
-        return convert_by_vocab(self.output_vocab, tokens)
+        return convert_by_vocab(self.output_vocab, tokens, self.unk_id)
 
     def convert_output_ids_to_tokens(self, ids):
         """ Converts all given tokens to the ids using the output vocabulary"""
-        return convert_by_vocab(self.inv_output_vocab, ids)
+        return convert_by_vocab(self.inv_output_vocab, ids, self.unk)
 
     def get_output_vocab_size(self):
         """ Returns size of output vocabulary """

@@ -1,10 +1,11 @@
-import data
-import tokenizer
-
 import os
 import itertools
 import collections
 import argparse
+
+import data
+from data import DATA_FOLDER
+import tokenizer
 
 """Reads conll file using functions in data (only train files are used to create a vocabulary). Using generic 
 tokenizer functions (and not Tokenizer object that uses a vocabulary), creates input tokens vocabulary and target 
@@ -66,7 +67,7 @@ def create_vocab_files(src_file_path, vocab_file_path):
 if __name__ == '__main__':
     # Get location of current folder, to work with full file paths
     __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-    src_file_path = os.path.join(__location__, args.src_file)
+    src_file_path = os.path.join(__location__, DATA_FOLDER, args.src_file)
     vocab_file_path = src_file_path + "-vocab"
     # Create vocab files
     create_vocab_files(src_file_path, vocab_file_path)
