@@ -8,16 +8,13 @@ and also 2) Separates it to to input tokens and target tokens. conll: lemma-tab-
 DATA_FOLDER = 'data'
 
 """ READING FILES """
-
-
 def read_morph_file(morph_file_path):
     """ Reads conll file, split to line, and splits each line by tabs. Returns list of lists"""
     # Get all lines in file
     morph_file = open(morph_file_path, 'r', encoding='utf-8')
     lines = morph_file.readlines()
-
     outputs = []
-    # Seperate lines to proper format
+    # Separate lines to proper format
     for line in lines:
         if line != "\n":
             # Strip '\n' and split
@@ -41,9 +38,9 @@ def read_train_file(train_file_path):
 
     for lemma, target, feature in train_morph_list:
         # Add results to relevant lists
-        lemmas.append(lemma.lower())#(clean_word(lemma))
+        lemmas.append(lemma)
         features.append(feature)
-        targets.append(target.lower())#(clean_word(target))
+        targets.append(target)
 
     return lemmas, targets, features
 
@@ -56,7 +53,7 @@ def read_test_file(test_input_file):
 
     for lemma, feature in test_morph_list:
         # Add results to relevant lists
-        lemmas.append(lemma.lower())#clean_word(lemma))
+        lemmas.append(lemma)
         features.append(feature)
 
     return lemmas, features
@@ -64,7 +61,7 @@ def read_test_file(test_input_file):
 
 def read_train_file_tokens(train_file_path):
     """ Reads conll train file, and splits to input tokens and target tokens.
-	Each input and target is a list of tokens"""
+        Each input and target is a list of tokens"""
     lemmas, targets, features = read_train_file(train_file_path)
     # tokenize all three lists, get as list of tokens lists
     lemmas_tokens = tokenizer.tokenize_words(lemmas)

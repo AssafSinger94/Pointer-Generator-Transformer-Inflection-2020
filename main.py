@@ -9,7 +9,8 @@ import torch.optim as optim
 
 import dataset
 import tokenizer
-import model
+import transformer
+import pointer_generator
 from data import DATA_FOLDER
 
 # Training settings
@@ -26,8 +27,6 @@ parser.add_argument('--vocab-file', type=str, default='data', metavar='S',
                     help="Base name of vocabulary files")
 parser.add_argument('--batch-size', type=int, default=128, metavar='N',
                     help='input batch size for training (default: 128)')
-# parser.add_argument('--plots-folder', type=str, default='plots', metavar='D',
-#                     help='how many batches to wait before logging training status')
 # parser.add_argument('--model-folder', type=str, default='model', metavar='D',
 #                     help='how many batches to wait before logging training status')
 args = parser.parse_args()
@@ -43,35 +42,46 @@ output_vocab_file_path = os.path.join(__location__, DATA_FOLDER, args.vocab_file
 myTokenizer = tokenizer.Tokenizer(input_vocab_file_path, output_vocab_file_path)
 
 """ CONSTANTS """
-MAX_SEQ_LEN = 25
+MAX_SRC_SEQ_LEN = 30
+MAX_TGT_SEQ_LEN = 25
 SRC_VOCAB_SIZE = myTokenizer.get_input_vocab_size()
 TGT_VOCAB_SIZE = myTokenizer.get_output_vocab_size()
 # Model Hyperparameters
-# BEST MODEL FOR MEDIUM RESOURCE
-EMBEDDING_DIM = 64
-FCN_HIDDEN_DIM = 256
-NUM_HEADS = 4
-NUM_LAYERS = 2
-DROPOUT = 0.2
-# # BEST MODEL FOR LOW RESOURCE
-# EMBEDDING_DIM = 128
-# FCN_HIDDEN_DIM = 64
+# # BEST MODEL FOR MEDIUM RESOURCE
+# EMBEDDING_DIM = 64
+# FCN_HIDDEN_DIM = 256
 # NUM_HEADS = 4
 # NUM_LAYERS = 2
 # DROPOUT = 0.2
+# BEST MODEL FOR LOW RESOURCE
+EMBEDDING_DIM = 128
+FCN_HIDDEN_DIM = 64
+NUM_HEADS = 4
+NUM_LAYERS = 2
+DROPOUT = 0.2
 
 """ MODEL AND DATA LOADER """
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-model = model.TransformerModel(src_vocab_size=SRC_VOCAB_SIZE, tgt_vocab_size=TGT_VOCAB_SIZE,
-                               embedding_dim=EMBEDDING_DIM,
-                               fcn_hidden_dim=FCN_HIDDEN_DIM, num_heads=NUM_HEADS, num_layers=NUM_LAYERS,
-                               dropout=DROPOUT)
+# model = transformer.TransformerModel(src_vocab_size=SRC_VOCAB_SIZE, tgt_vocab_size=TGT_VOCAB_SIZE,
+#                                      embedding_dim=EMBEDDING_DIM,
+#                                      fcn_hidden_dim=FCN_HIDDEN_DIM, num_heads=NUM_HEADS, num_layers=NUM_LAYERS,
+#                                      dropout=DROPOUT)
+model = pointer_generator.PointerGeneratorTransformer(src_vocab_size=SRC_VOCAB_SIZE, tgt_vocab_size=TGT_VOCAB_SIZE,
+                                     input_to_output_vocab_conversion_matrix=myTokenizer.input_to_output_vocab_conversion_matrix,
+                                     embedding_dim=EMBEDDING_DIM,
+                                     fcn_hidden_dim=FCN_HIDDEN_DIM, num_heads=NUM_HEADS, num_layers=NUM_LAYERS,
+                                     dropout=DROPOUT)
 model.to(device)
-criterion = nn.CrossEntropyLoss(reduction='mean', ignore_index=myTokenizer.pad_id)
+# criterion = nn.CrossEntropyLoss(reduction='mean', ignore_index=myTokenizer.pad_id)
+criterion = nn.NLLLoss(reduction='mean', ignore_index=myTokenizer.pad_id)
 optimizer = optim.Adam(model.parameters(), lr=args.lr)
 # Initialize DataLoader object
 data_loader = dataset.DataLoader(myTokenizer, train_file_path=train_file_path, valid_file_path=valid_file_path,
-                                 test_file_path=None, device=device, batch_size=args.batch_size, max_seq_len=MAX_SEQ_LEN)
+                                 test_file_path=None, device=device, batch_size=args.batch_size,
+                                 max_src_seq_len=MAX_SRC_SEQ_LEN, max_tgt_seq_len=MAX_TGT_SEQ_LEN)
+# data_loader = dataset.DataLoader(myTokenizer, train_file_path=train_file_path, valid_file_path=None,
+#                                  test_file_path=None, device=device, batch_size=args.batch_size,
+#                                  max_src_seq_len=MAX_SRC_SEQ_LEN, max_tgt_seq_len=MAX_TGT_SEQ_LEN)
 
 
 def train(epoch):
@@ -154,7 +164,7 @@ if __name__ == '__main__':
 
     # remove unnecessary model files (disk quota limit)
     for filename in sorted(os.listdir(checkpoints_folder)):
-        if os.path.isfile(filename) and ("best" not in filename):
+        if os.path.isfile(os.path.join(checkpoints_folder, filename)) and ("best" not in filename):
             os.remove(os.path.join(checkpoints_folder, filename))
 
     print('\nFinished training, best model on validation set: ', best_valid_epoch)

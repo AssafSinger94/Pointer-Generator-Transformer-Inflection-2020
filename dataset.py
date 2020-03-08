@@ -5,7 +5,7 @@ import data
 # import tokenizer
 
 
-def get_train_dataset(train_file_path, tokenizer, max_seq_len=25):
+def get_train_dataset(train_file_path, tokenizer, max_src_seq_len=30, max_tgt_seq_len=25):
     """ Reads entire dataset file, tokenizes it, and converts all tokens to ids using given tokenizer object """
     # Read dataset file, and get input tokens and output tokens from file
     inputs_tokens, outputs_tokens = data.read_train_file_tokens(train_file_path)
@@ -18,13 +18,13 @@ def get_train_dataset(train_file_path, tokenizer, max_seq_len=25):
 
     # Get lists of all input ids, target ids and target_y ids, where each sequence padded up to max length
     inputs_ids = [
-        tokenizer.convert_input_tokens_to_ids(tokenizer.pad_tokens_sequence(input_tokens, max_seq_len))
+        tokenizer.convert_input_tokens_to_ids(tokenizer.pad_tokens_sequence(input_tokens, max_src_seq_len))
         for input_tokens in inputs_tokens]
     targets_ids = [
-        tokenizer.convert_output_tokens_to_ids(tokenizer.pad_tokens_sequence(target_tokens, max_seq_len))
+        tokenizer.convert_output_tokens_to_ids(tokenizer.pad_tokens_sequence(target_tokens, max_tgt_seq_len))
         for target_tokens in targets_tokens]
     targets_y_ids = [
-        tokenizer.convert_output_tokens_to_ids(tokenizer.pad_tokens_sequence(target_y_tokens, max_seq_len))
+        tokenizer.convert_output_tokens_to_ids(tokenizer.pad_tokens_sequence(target_y_tokens, max_tgt_seq_len))
         for target_y_tokens in targets_y_tokens]
 
     return inputs_ids, targets_ids, targets_y_ids
@@ -84,14 +84,16 @@ def get_batches(input_ids, target_ids, target_y_ids, device, batch_size=128):
 class DataLoader(object):
     """ Contains all utilities for reading train/valid/test sets """
     def __init__(self, tokenizer, train_file_path=None, valid_file_path=None, test_file_path=None,
-                 device="cpu", batch_size=128, max_seq_len=25):
+                 device="cpu", batch_size=128, max_src_seq_len=30, max_tgt_seq_len=25):
         self.tokenizer = tokenizer
         self.device = device
         self.batch_size = batch_size
-        self.max_seq_len = max_seq_len
+        self.max_src_seq_len = max_src_seq_len
+        self.max_tgt_seq_len = max_tgt_seq_len
         # Read train file and get train set
         if train_file_path is not None:
-            train_input_ids, train_target_ids, train_target_y_ids = get_train_dataset(train_file_path, tokenizer, self.max_seq_len)
+            train_input_ids, train_target_ids, train_target_y_ids = get_train_dataset(train_file_path, tokenizer,
+                                                                                      self.max_src_seq_len, self.max_tgt_seq_len)
             self.train_input_ids = train_input_ids
             self.train_target_ids = train_target_ids
             self.train_target_y_ids = train_target_y_ids
@@ -102,7 +104,8 @@ class DataLoader(object):
 
         if valid_file_path is not None:
             # Read validation file and get validation set, for checking loss using teacher forcing
-            valid_input_ids_tf, valid_target_ids_tf, valid_target_y_ids_tf = get_train_dataset(valid_file_path, tokenizer, self.max_seq_len)
+            valid_input_ids_tf, valid_target_ids_tf, valid_target_y_ids_tf = get_train_dataset(valid_file_path, tokenizer,
+                                                                                               self.max_src_seq_len, self.max_tgt_seq_len)
             self.valid_input_ids_tf = valid_input_ids_tf
             self.valid_target_ids_tf = valid_target_ids_tf
             self.valid_target_y_ids_tf = valid_target_y_ids_tf

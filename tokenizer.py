@@ -62,6 +62,8 @@ class Tokenizer(object):
                                        self.eos, self.pad, self.unk)  # vocabulary of all token->id in the output
         self.inv_output_vocab = {v: k for k, v in self.output_vocab.items()}  # reverse vocabulary of output, id->token
 
+        self.input_to_output_vocab_conversion_matrix = self.get_src_to_tgt_vocab_conversion_matrix()
+
     def add_sequence_symbols(self, tokens_list):
         """ Adds eos and sos symbols to each sequence of tokens"""
         return [[self.sos] + tokens + [self.eos] for tokens in tokens_list]
@@ -106,3 +108,14 @@ class Tokenizer(object):
         padding_len = max_seq_len - len(tokens)
         padding = [self.pad] * padding_len
         return tokens + padding
+
+    def get_src_to_tgt_vocab_conversion_matrix(self):
+        # Initialize conversion matrix
+        src_to_tgt_conversion_matrix = torch.zeros(self.get_input_vocab_size(), self.get_output_vocab_size())
+        input_vocab_items = self.input_vocab.items()
+        # Go over all (token, id) items in input vocab
+        for src_token, src_id in input_vocab_items:
+            tgt_id = self.output_vocab.get(src_token, self.unk_id)
+            src_to_tgt_conversion_matrix[src_id][tgt_id] = 1
+        return src_to_tgt_conversion_matrix
+

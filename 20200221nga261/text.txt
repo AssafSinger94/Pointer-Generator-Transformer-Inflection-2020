@@ -1,0 +1,14 @@
+1)Nikita Amlani
+2)nga261
+3)draw.oi
+4) My computer
+5) Windows 10 Home
+6) Constraints - 
+Woman - number of visits can be atmost 255 
+The License# cant be same for Surgeon and Internist
+
+Cardinality - 
+1..* between two internists
+0..* between internist admires surgeon
+0..255 between women and visit
+
