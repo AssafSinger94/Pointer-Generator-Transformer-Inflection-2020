@@ -60,7 +60,7 @@ def prdeict_word(data, max_seq_len):
     for j in range(1, max_seq_len):
         # Compute output of model
         out = model(data, outputs[:, :j]).squeeze()
-        out = F.softmax(out, dim=-1)
+        # out = F.softmax(out, dim=-1)
         val, ix = out.topk(1)
         outputs[0, j] = ix[-1]
         if ix[-1] == myTokenizer.eos_id:
