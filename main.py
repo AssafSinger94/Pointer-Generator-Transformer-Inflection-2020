@@ -15,35 +15,36 @@ from data import DATA_FOLDER
 
 # Training settings
 parser = argparse.ArgumentParser(description='Training Transformer for morphological inflection')
+parser.add_argument('--model', type=str, default='transformer', metavar='S',
+                    help="Architecture type for model: transformer, pointer_generator")
 parser.add_argument('--epochs', type=int, default=100, metavar='N',
-                    help='number of epochs to train (default: 10)')
+                    help='number of epochs to train (default: 100)')
 parser.add_argument('--lr', type=float, default=5e-4, metavar='LR',
                     help='learning rate (default: 0.01)')
 parser.add_argument('--train-file', type=str, default='data', metavar='S',
-                    help="Train file of the dataset")
+                    help="Train file of the dataset (File is located in DATA_FOLDER)")
 parser.add_argument('--valid-file', type=str, default='data', metavar='S',
-                    help="Validation file of the dataset")
+                    help="Validation file of the dataset (File is located in DATA_FOLDER)")
 parser.add_argument('--vocab-file', type=str, default='data', metavar='S',
-                    help="Base name of vocabulary files")
+                    help="Base name of vocabulary files (must include folder path)")
 parser.add_argument('--batch-size', type=int, default=128, metavar='N',
                     help='input batch size for training (default: 128)')
-# parser.add_argument('--model-folder', type=str, default='model', metavar='D',
-#                     help='how many batches to wait before logging training status')
+parser.add_argument('--checkpoints-folder', type=str, default='model-checkpoints', metavar='S',
+                    help='Folder to keep checkpoints of model')
 args = parser.parse_args()
 
 # Get train and validation file paths
-__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-train_file_path = os.path.join(__location__, DATA_FOLDER, args.train_file)
-valid_file_path = os.path.join(__location__, DATA_FOLDER, args.valid_file)
+train_file_path = os.path.join(DATA_FOLDER, args.train_file)
+valid_file_path = os.path.join(DATA_FOLDER, args.valid_file)
 # Get vocabulary paths
-input_vocab_file_path = os.path.join(__location__, DATA_FOLDER, args.vocab_file + "-input")
-output_vocab_file_path = os.path.join(__location__, DATA_FOLDER, args.vocab_file + "-output")
+input_vocab_file_path = os.path.join(args.vocab_file + "-input")
+output_vocab_file_path = os.path.join(args.vocab_file + "-output")
 # Initialize Tokenizer object with input and output vocabulary files
 myTokenizer = tokenizer.Tokenizer(input_vocab_file_path, output_vocab_file_path)
 
 """ CONSTANTS """
-MAX_SRC_SEQ_LEN = 30
-MAX_TGT_SEQ_LEN = 25
+MAX_SRC_SEQ_LEN = 32
+MAX_TGT_SEQ_LEN = 30
 SRC_VOCAB_SIZE = myTokenizer.get_input_vocab_size()
 TGT_VOCAB_SIZE = myTokenizer.get_output_vocab_size()
 # Model Hyperparameters
@@ -62,18 +63,22 @@ DROPOUT = 0.2
 
 """ MODEL AND DATA LOADER """
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-# model = transformer.TransformerModel(src_vocab_size=SRC_VOCAB_SIZE, tgt_vocab_size=TGT_VOCAB_SIZE,
-#                                      embedding_dim=EMBEDDING_DIM,
-#                                      fcn_hidden_dim=FCN_HIDDEN_DIM, num_heads=NUM_HEADS, num_layers=NUM_LAYERS,
-#                                      dropout=DROPOUT)
-model = pointer_generator.PointerGeneratorTransformer(src_vocab_size=SRC_VOCAB_SIZE, tgt_vocab_size=TGT_VOCAB_SIZE,
+model = transformer.TransformerModel(src_vocab_size=SRC_VOCAB_SIZE, tgt_vocab_size=TGT_VOCAB_SIZE,
+                                     embedding_dim=EMBEDDING_DIM,
+                                     fcn_hidden_dim=FCN_HIDDEN_DIM, num_heads=NUM_HEADS, num_layers=NUM_LAYERS,
+                                     dropout=DROPOUT) \
+    if (args.model == "transformer") \
+    else \
+    pointer_generator.PointerGeneratorTransformer(src_vocab_size=SRC_VOCAB_SIZE, tgt_vocab_size=TGT_VOCAB_SIZE,
                                      input_to_output_vocab_conversion_matrix=myTokenizer.input_to_output_vocab_conversion_matrix,
                                      embedding_dim=EMBEDDING_DIM,
                                      fcn_hidden_dim=FCN_HIDDEN_DIM, num_heads=NUM_HEADS, num_layers=NUM_LAYERS,
                                      dropout=DROPOUT)
 model.to(device)
-# criterion = nn.CrossEntropyLoss(reduction='mean', ignore_index=myTokenizer.pad_id)
-criterion = nn.NLLLoss(reduction='mean', ignore_index=myTokenizer.pad_id)
+criterion = nn.CrossEntropyLoss(reduction='mean', ignore_index=myTokenizer.pad_id)\
+    if (args.model == "transformer")\
+    else \
+    nn.NLLLoss(reduction='mean', ignore_index=myTokenizer.pad_id)
 optimizer = optim.Adam(model.parameters(), lr=args.lr)
 # Initialize DataLoader object
 data_loader = dataset.DataLoader(myTokenizer, train_file_path=train_file_path, valid_file_path=valid_file_path,
@@ -143,7 +148,7 @@ if __name__ == '__main__':
     # Initialize best validation loss placeholders
     best_valid_loss = sys.maxsize
     best_valid_epoch = 0
-    checkpoints_folder = 'checkpoints/'
+    checkpoints_folder = "%s/" % args.checkpoints_folder
     best_model_file = '%smodel_best.pth' % checkpoints_folder
     for epoch in range(1, args.epochs + 1):
         print("\nTrain Epoch: %d started" % epoch)
@@ -168,3 +173,11 @@ if __name__ == '__main__':
             os.remove(os.path.join(checkpoints_folder, filename))
 
     print('\nFinished training, best model on validation set: ', best_valid_epoch)
+
+
+# __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+# train_file_path = os.path.join(__location__, DATA_FOLDER, args.train_file)
+# valid_file_path = os.path.join(__location__, DATA_FOLDER, args.valid_file)
+# # Get vocabulary paths
+# input_vocab_file_path = os.path.join(__location__, DATA_FOLDER, args.vocab_file + "-input")
+# output_vocab_file_path = os.path.join(__location__, DATA_FOLDER, args.vocab_file + "-output")

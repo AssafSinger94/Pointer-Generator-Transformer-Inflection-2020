@@ -149,12 +149,9 @@ class PointerGeneratorTransformer(nn.Module):
         return torch.log(p.transpose(0, 1))
 
 
-
-
 # scripted_module = torch.jit.script(ContextVectors())
 # print(scripted_module.code)
-
-
+#
 # def get_context_vectors_1(self, hidden_states, attention, N, T):
 #     """ compute context vectors using hidden states and attention over the source """
 #     # Replace source and embedding dimension

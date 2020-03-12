@@ -52,7 +52,7 @@ def get_test_dataset(test_file_path, tokenizer, device):
     inputs_tokens = tokenizer.add_sequence_symbols(inputs_tokens)
     # Get tensors of all input ids
     inputs_ids = tokenizer.get_id_tensors(inputs_tokens, device, "INPUT")
-    return inputs_ids
+    return inputs_ids, inputs_tokens
 
 def shuffle_together(list1, list2, list3):
     """Shuffles two lists together"""

@@ -15,8 +15,10 @@ tokens vocabulary in different files. """
 # Arguments
 parser = argparse.ArgumentParser(
     description='Reads conll file (which is the dataset), and creates vocabulary files for input and output')
-parser.add_argument('--src-file', type=str, default='data', metavar='S',
-                    help="Source file of the dataset used to create the vocabulary")
+parser.add_argument('--src-file', type=str, default='train', metavar='S',
+                    help="Source file of the dataset used to create the vocabulary (File is located in DATA_FOLDER)")
+parser.add_argument('--vocab-file', type=str, default='vocab', metavar='S',
+                    help="Target path of the vocabulary (must include folder path)")
 args = parser.parse_args()
 
 """ CONSTANTS """
@@ -65,9 +67,13 @@ def create_vocab_files(src_file_path, vocab_file_path):
 
 
 if __name__ == '__main__':
-    # Get location of current folder, to work with full file paths
-    __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-    src_file_path = os.path.join(__location__, DATA_FOLDER, args.src_file)
-    vocab_file_path = src_file_path + "-vocab"
+    # Get source and validation file paths
+    src_file_path = os.path.join(DATA_FOLDER, args.src_file)
+    vocab_file_path = os.path.join(args.vocab_file)
     # Create vocab files
     create_vocab_files(src_file_path, vocab_file_path)
+
+
+# __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+# src_file_path = os.path.join(__location__, DATA_FOLDER, args.src_file)
+# vocab_file_path = os.path.join(__location__, args.vocab_file)

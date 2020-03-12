@@ -11,27 +11,26 @@ import transformer
 
 # Arguments
 parser = argparse.ArgumentParser(description='Evaluating the transformer over test and validation sets')
+parser.add_argument('--model-checkpoint', type=str, default='checkpoints/model_best.pth', metavar='M',
+                    help="the model file to be evaluated. Usually is of the form model_X.pth(must include folder path)")
 parser.add_argument('--valid-file', type=str, default='data', metavar='S',
-                    help="Validation file of the dataset")
+                    help="Validation file of the dataset (File is located in DATA_FOLDER)")
 parser.add_argument('--test-file', type=str, default='data', metavar='S',
-                    help="Test file of the dataset")
+                    help="Test file of the dataset (File is located in DATA_FOLDER)")
 parser.add_argument('--vocab-file', type=str, default='data', metavar='S',
-                    help="Base name of vocabulary files")
-parser.add_argument('--model', type=str, default='checkpoints/model_best.pth', metavar='M',
-                    help="the model file to be evaluated. Usually it is of the form model_X.pth")
+                    help="Base name of vocabulary files (must include folder path)")
 parser.add_argument('--out-file', type=str, default='pred', metavar='D',
-                    help="Name of output file containing predictions of the test set")
+                    help="Name of output file containing predictions of the test set (must include folder path)")
 args = parser.parse_args()
 
 """ FILES AND TOKENIZER """
 # Get validation and test file path
-__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-valid_file_path = os.path.join(__location__, DATA_FOLDER, args.valid_file)
-test_file_path = os.path.join(__location__, DATA_FOLDER, args.test_file)
-out_file_path = os.path.join(__location__, DATA_FOLDER, args.out_file)
+valid_file_path = os.path.join(DATA_FOLDER, args.valid_file)
+test_file_path = os.path.join(DATA_FOLDER, args.test_file)
+out_file_path = os.path.join(args.out_file)
 # Get vocabulary paths
-input_vocab_file_path = os.path.join(__location__, DATA_FOLDER, args.vocab_file + "-input")
-output_vocab_file_path = os.path.join(__location__, DATA_FOLDER, args.vocab_file + "-output")
+input_vocab_file_path = os.path.join(args.vocab_file + "-input")
+output_vocab_file_path = os.path.join(args.vocab_file + "-output")
 # Initialize Tokenizer object with input and output vocabulary files
 myTokenizer = tokenizer.Tokenizer(input_vocab_file_path, output_vocab_file_path)
 
@@ -42,7 +41,7 @@ MAX_TGT_SEQ_LEN = 25
 """ MODEL AND DATA LOADER """
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 # Load model from checkpoint in evaluation mode
-model = torch.load(args.model)
+model = torch.load(args.model_checkpoint)
 model.eval()
 # Initialize DataLoader object
 # data_loader = dataset.DataLoader(myTokenizer, train_file_path=None, valid_file_path=valid_file_path,
@@ -92,14 +91,21 @@ def evaluate_validation(max_seq_len=MAX_TGT_SEQ_LEN):
 def evaluate(max_seq_len=MAX_TGT_SEQ_LEN):
     """ Runs evaluation over the test set and prints output to prediction file.
         Predictions generated in sequential order. """
-    input_ids = data_loader.get_test_set()
+    input_ids, input_tokens = data_loader.get_test_set()
     predictions = []
     # Go over each example
-    for i, data in enumerate(input_ids):
+    for i, (data, data_tokens) in enumerate(zip(input_ids, input_tokens)):
         # Get prediction from model
         pred = prdeict_word(data, max_seq_len)
         # Strip off sos and eos tokens, and convert from predicted ids to the predicted word
-        pred_word = ''.join(myTokenizer.convert_output_ids_to_tokens(pred[1:-1].tolist()))
+        pred_tokens = myTokenizer.convert_output_ids_to_tokens(pred[1:-1].tolist())
+
+        # where token is unkown token, copy from the source at the same token location
+        for j in range(len(pred_tokens)):
+            if pred_tokens[j] == myTokenizer.unk and (j < len(data_tokens) - 1):
+                pred_tokens[j] = data_tokens[j + 1] # account for data token padded with <s> at the beggining
+
+        pred_word = ''.join(pred_tokens)
         predictions.append(pred_word)
     write_predictions_to_file(predictions, out_file_path)
 
@@ -109,3 +115,11 @@ if __name__ == '__main__':
     # evaluate_validation()
     # Generating predictions for test set
     evaluate()
+
+# __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+# valid_file_path = os.path.join(__location__, DATA_FOLDER, args.valid_file)
+# test_file_path = os.path.join(__location__, DATA_FOLDER, args.test_file)
+# out_file_path = os.path.join(__location__, DATA_FOLDER, args.out_file)
+# # Get vocabulary paths
+# input_vocab_file_path = os.path.join(__location__, DATA_FOLDER, args.vocab_file + "-input")
+# output_vocab_file_path = os.path.join(__location__, DATA_FOLDER, args.vocab_file + "-output")

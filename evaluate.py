@@ -6,17 +6,16 @@ from data import DATA_FOLDER
 
 # Arguments
 parser = argparse.ArgumentParser(description='Computing accuracy of model predictions compare to target file')
-parser.add_argument('--pred-file', type=str, default='data', metavar='S',
-                    help="File with model predictions")
-parser.add_argument('--target-file', type=str, default='data', metavar='S',
-                    help="File with gold targets")
+parser.add_argument('--pred-file', type=str, default='data/pred', metavar='S',
+                    help="File with model predictions (must include folder path)")
+parser.add_argument('--target-file', type=str, default='target', metavar='S',
+                    help="File with gold targets (File is located in DATA_FOLDER)")
 args = parser.parse_args()
 
 """ Files """
 # Get validation and test file path
-__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-pred_file_path = os.path.join(__location__, DATA_FOLDER, args.pred_file)
-target_file_path = os.path.join(__location__, DATA_FOLDER, args.target_file)
+pred_file_path = os.path.join(args.pred_file)
+target_file_path = os.path.join(DATA_FOLDER, args.target_file)
 
 """ FUNCTIONS """
 def accuracy(predictions, targets):
@@ -35,13 +34,16 @@ def evaluate_predictions(pred_file, target_file):
     truth = [line[1] for line in target_lines]
     print("Test set. accuracy: %.4f" % accuracy(predictions, truth))
 
-"""Version with words cleaned"""
-# def evaluate_predictions(pred_file, target_file):
-#     _, predictions, _ = data.read_train_file(pred_file)
-#     _, truth, _ = data.read_train_file(target_file)
-#     print("Test set. accuracy: %.4f" % accuracy(predictions, truth))
-
 
 if __name__ == '__main__':
     # Compute accuracy of predictions compare to truth
     evaluate_predictions(pred_file_path, target_file_path)
+
+# __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+# pred_file_path = os.path.join(__location__, DATA_FOLDER, args.pred_file)
+# target_file_path = os.path.join(__location__, DATA_FOLDER, args.target_file)
+# """Version with words cleaned"""
+# def evaluate_predictions(pred_file, target_file):
+#     _, predictions, _ = data.read_train_file(pred_file)
+#     _, truth, _ = data.read_train_file(target_file)
+#     print("Test set. accuracy: %.4f" % accuracy(predictions, truth))
