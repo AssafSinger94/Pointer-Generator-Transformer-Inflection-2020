@@ -2,26 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d375a0ca-d981-4f34-8067-71cef9e79afe" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/run_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/transformer.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkpoints/Pointer Generator/Medium/model_best.pth" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/Pointer Generator/Medium/model_best.pth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkpoints/model_best.pth" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/model_best.pth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/english-test-pred-low" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/english-train-low-vocab-input" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/english-train-low-vocab-output" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/english-train-medium-vocab-input" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/english-train-medium-vocab-output" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generate.py" beforeDir="false" afterPath="$PROJECT_DIR$/generate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pointer_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/pointer_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vocabulary.py" beforeDir="false" afterPath="$PROJECT_DIR$/vocabulary.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,6 +17,7 @@
   </component>
   <component name="ProjectId" id="1Z29qdkzBDbpZM3S9tqwdqNGSV5" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
@@ -59,7 +43,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1584026513429</updated>
-      <workItem from="1584026519684" duration="876000" />
+      <workItem from="1584026519684" duration="1049000" />
+      <workItem from="1584029073319" duration="72000" />
+      <workItem from="1584133164532" duration="865000" />
     </task>
     <servers />
   </component>
@@ -71,7 +57,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

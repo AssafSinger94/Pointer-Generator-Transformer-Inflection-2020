@@ -1,0 +1,1078 @@
+C:\Users\Assaf\AppData\Local\Programs\Python\Python37\python.exe "C:/Users/Assaf/Documents/Courses/Year 2/Thesis/Work/Code/Transformer/transformer/main.py" --epochs 200 --batch-size 128 --train-file english-train-medium --valid-file english-dev --vocab-file english-train-medium-vocab
+
+Train Epoch: 1 started
+Train Epoch: 1, loss: 2.74590
+Validation. Epoch: 1, loss: 2.5395, accuracy: 0.0000
+Saved model to checkpoints/model_1.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 2 started
+Train Epoch: 2, loss: 2.57232
+Validation. Epoch: 2, loss: 2.3368, accuracy: 0.0000
+Saved model to checkpoints/model_2.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 3 started
+Train Epoch: 3, loss: 2.33931
+Validation. Epoch: 3, loss: 1.8636, accuracy: 0.0000
+Saved model to checkpoints/model_3.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 4 started
+Train Epoch: 4, loss: 2.02593
+Validation. Epoch: 4, loss: 1.5910, accuracy: 0.0000
+Saved model to checkpoints/model_4.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 5 started
+Train Epoch: 5, loss: 1.77049
+Validation. Epoch: 5, loss: 1.3081, accuracy: 0.0030
+Saved model to checkpoints/model_5.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 6 started
+Train Epoch: 6, loss: 1.53634
+Validation. Epoch: 6, loss: 1.1047, accuracy: 0.0430
+Saved model to checkpoints/model_6.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 7 started
+Train Epoch: 7, loss: 1.34623
+Validation. Epoch: 7, loss: 0.9219, accuracy: 0.1050
+Saved model to checkpoints/model_7.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 8 started
+Train Epoch: 8, loss: 1.20263
+Validation. Epoch: 8, loss: 0.7900, accuracy: 0.1100
+Saved model to checkpoints/model_8.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 9 started
+Train Epoch: 9, loss: 1.08948
+Validation. Epoch: 9, loss: 0.6730, accuracy: 0.2090
+Saved model to checkpoints/model_9.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 10 started
+Train Epoch: 10, loss: 0.99910
+Validation. Epoch: 10, loss: 0.5849, accuracy: 0.2550
+Saved model to checkpoints/model_10.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 11 started
+Train Epoch: 11, loss: 0.91378
+Validation. Epoch: 11, loss: 0.5175, accuracy: 0.2500
+Saved model to checkpoints/model_11.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 12 started
+Train Epoch: 12, loss: 0.85107
+Validation. Epoch: 12, loss: 0.4856, accuracy: 0.2700
+Saved model to checkpoints/model_12.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 13 started
+Train Epoch: 13, loss: 0.78504
+Validation. Epoch: 13, loss: 0.4296, accuracy: 0.2870
+Saved model to checkpoints/model_13.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 14 started
+Train Epoch: 14, loss: 0.74652
+Validation. Epoch: 14, loss: 0.4103, accuracy: 0.3170
+Saved model to checkpoints/model_14.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 15 started
+Train Epoch: 15, loss: 0.69041
+Validation. Epoch: 15, loss: 0.3830, accuracy: 0.2980
+Saved model to checkpoints/model_15.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 16 started
+Train Epoch: 16, loss: 0.66597
+Validation. Epoch: 16, loss: 0.3502, accuracy: 0.3940
+Saved model to checkpoints/model_16.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 17 started
+Train Epoch: 17, loss: 0.63192
+Validation. Epoch: 17, loss: 0.3471, accuracy: 0.3530
+Saved model to checkpoints/model_17.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 18 started
+Train Epoch: 18, loss: 0.60326
+Validation. Epoch: 18, loss: 0.3150, accuracy: 0.3960
+Saved model to checkpoints/model_18.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 19 started
+Train Epoch: 19, loss: 0.57748
+Validation. Epoch: 19, loss: 0.3004, accuracy: 0.4380
+Saved model to checkpoints/model_19.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 20 started
+Train Epoch: 20, loss: 0.55047
+Validation. Epoch: 20, loss: 0.2743, accuracy: 0.4840
+Saved model to checkpoints/model_20.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 21 started
+Train Epoch: 21, loss: 0.53375
+Validation. Epoch: 21, loss: 0.2612, accuracy: 0.4960
+Saved model to checkpoints/model_21.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 22 started
+Train Epoch: 22, loss: 0.51545
+Validation. Epoch: 22, loss: 0.2474, accuracy: 0.5370
+Saved model to checkpoints/model_22.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 23 started
+Train Epoch: 23, loss: 0.49667
+Validation. Epoch: 23, loss: 0.2393, accuracy: 0.5350
+Saved model to checkpoints/model_23.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 24 started
+Train Epoch: 24, loss: 0.47744
+Validation. Epoch: 24, loss: 0.2324, accuracy: 0.5630
+Saved model to checkpoints/model_24.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 25 started
+Train Epoch: 25, loss: 0.45890
+Validation. Epoch: 25, loss: 0.2261, accuracy: 0.6020
+Saved model to checkpoints/model_25.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 26 started
+Train Epoch: 26, loss: 0.45007
+Validation. Epoch: 26, loss: 0.2276, accuracy: 0.5930
+Saved model to checkpoints/model_26.pth
+
+Train Epoch: 27 started
+Train Epoch: 27, loss: 0.43773
+Validation. Epoch: 27, loss: 0.2206, accuracy: 0.5740
+Saved model to checkpoints/model_27.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 28 started
+Train Epoch: 28, loss: 0.42654
+Validation. Epoch: 28, loss: 0.2116, accuracy: 0.6240
+Saved model to checkpoints/model_28.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 29 started
+Train Epoch: 29, loss: 0.40098
+Validation. Epoch: 29, loss: 0.2070, accuracy: 0.6030
+Saved model to checkpoints/model_29.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 30 started
+Train Epoch: 30, loss: 0.39720
+Validation. Epoch: 30, loss: 0.1956, accuracy: 0.6520
+Saved model to checkpoints/model_30.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 31 started
+Train Epoch: 31, loss: 0.39151
+Validation. Epoch: 31, loss: 0.1899, accuracy: 0.6970
+Saved model to checkpoints/model_31.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 32 started
+Train Epoch: 32, loss: 0.37983
+Validation. Epoch: 32, loss: 0.1835, accuracy: 0.6810
+Saved model to checkpoints/model_32.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 33 started
+Train Epoch: 33, loss: 0.37086
+Validation. Epoch: 33, loss: 0.1918, accuracy: 0.6780
+Saved model to checkpoints/model_33.pth
+
+Train Epoch: 34 started
+Train Epoch: 34, loss: 0.36373
+Validation. Epoch: 34, loss: 0.1722, accuracy: 0.7380
+Saved model to checkpoints/model_34.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 35 started
+Train Epoch: 35, loss: 0.35177
+Validation. Epoch: 35, loss: 0.1709, accuracy: 0.7440
+Saved model to checkpoints/model_35.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 36 started
+Train Epoch: 36, loss: 0.34444
+Validation. Epoch: 36, loss: 0.1705, accuracy: 0.7470
+Saved model to checkpoints/model_36.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 37 started
+Train Epoch: 37, loss: 0.34981
+Validation. Epoch: 37, loss: 0.1603, accuracy: 0.7530
+Saved model to checkpoints/model_37.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 38 started
+Train Epoch: 38, loss: 0.33776
+Validation. Epoch: 38, loss: 0.1542, accuracy: 0.7900
+Saved model to checkpoints/model_38.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 39 started
+Train Epoch: 39, loss: 0.32623
+Validation. Epoch: 39, loss: 0.1469, accuracy: 0.8010
+Saved model to checkpoints/model_39.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 40 started
+Train Epoch: 40, loss: 0.31962
+Validation. Epoch: 40, loss: 0.1415, accuracy: 0.8210
+Saved model to checkpoints/model_40.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 41 started
+Train Epoch: 41, loss: 0.31754
+Validation. Epoch: 41, loss: 0.1447, accuracy: 0.8080
+Saved model to checkpoints/model_41.pth
+
+Train Epoch: 42 started
+Train Epoch: 42, loss: 0.30140
+Validation. Epoch: 42, loss: 0.1455, accuracy: 0.8150
+Saved model to checkpoints/model_42.pth
+
+Train Epoch: 43 started
+Train Epoch: 43, loss: 0.30120
+Validation. Epoch: 43, loss: 0.1387, accuracy: 0.8190
+Saved model to checkpoints/model_43.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 44 started
+Train Epoch: 44, loss: 0.29666
+Validation. Epoch: 44, loss: 0.1422, accuracy: 0.8090
+Saved model to checkpoints/model_44.pth
+
+Train Epoch: 45 started
+Train Epoch: 45, loss: 0.29069
+Validation. Epoch: 45, loss: 0.1388, accuracy: 0.8230
+Saved model to checkpoints/model_45.pth
+
+Train Epoch: 46 started
+Train Epoch: 46, loss: 0.28083
+Validation. Epoch: 46, loss: 0.1267, accuracy: 0.8350
+Saved model to checkpoints/model_46.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 47 started
+Train Epoch: 47, loss: 0.27352
+Validation. Epoch: 47, loss: 0.1250, accuracy: 0.8390
+Saved model to checkpoints/model_47.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 48 started
+Train Epoch: 48, loss: 0.27909
+Validation. Epoch: 48, loss: 0.1261, accuracy: 0.8340
+Saved model to checkpoints/model_48.pth
+
+Train Epoch: 49 started
+Train Epoch: 49, loss: 0.26479
+Validation. Epoch: 49, loss: 0.1210, accuracy: 0.8400
+Saved model to checkpoints/model_49.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 50 started
+Train Epoch: 50, loss: 0.26830
+Validation. Epoch: 50, loss: 0.1193, accuracy: 0.8400
+Saved model to checkpoints/model_50.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 51 started
+Train Epoch: 51, loss: 0.25270
+Validation. Epoch: 51, loss: 0.1156, accuracy: 0.8520
+Saved model to checkpoints/model_51.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 52 started
+Train Epoch: 52, loss: 0.25917
+Validation. Epoch: 52, loss: 0.1189, accuracy: 0.8390
+Saved model to checkpoints/model_52.pth
+
+Train Epoch: 53 started
+Train Epoch: 53, loss: 0.24783
+Validation. Epoch: 53, loss: 0.1220, accuracy: 0.8340
+Saved model to checkpoints/model_53.pth
+
+Train Epoch: 54 started
+Train Epoch: 54, loss: 0.24717
+Validation. Epoch: 54, loss: 0.1194, accuracy: 0.8390
+Saved model to checkpoints/model_54.pth
+
+Train Epoch: 55 started
+Train Epoch: 55, loss: 0.24343
+Validation. Epoch: 55, loss: 0.1135, accuracy: 0.8530
+Saved model to checkpoints/model_55.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 56 started
+Train Epoch: 56, loss: 0.25339
+Validation. Epoch: 56, loss: 0.1089, accuracy: 0.8570
+Saved model to checkpoints/model_56.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 57 started
+Train Epoch: 57, loss: 0.23846
+Validation. Epoch: 57, loss: 0.1077, accuracy: 0.8640
+Saved model to checkpoints/model_57.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 58 started
+Train Epoch: 58, loss: 0.23059
+Validation. Epoch: 58, loss: 0.1111, accuracy: 0.8660
+Saved model to checkpoints/model_58.pth
+
+Train Epoch: 59 started
+Train Epoch: 59, loss: 0.23209
+Validation. Epoch: 59, loss: 0.1106, accuracy: 0.8580
+Saved model to checkpoints/model_59.pth
+
+Train Epoch: 60 started
+Train Epoch: 60, loss: 0.22947
+Validation. Epoch: 60, loss: 0.1091, accuracy: 0.8570
+Saved model to checkpoints/model_60.pth
+
+Train Epoch: 61 started
+Train Epoch: 61, loss: 0.23390
+Validation. Epoch: 61, loss: 0.1071, accuracy: 0.8600
+Saved model to checkpoints/model_61.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 62 started
+Train Epoch: 62, loss: 0.21523
+Validation. Epoch: 62, loss: 0.1068, accuracy: 0.8630
+Saved model to checkpoints/model_62.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 63 started
+Train Epoch: 63, loss: 0.21271
+Validation. Epoch: 63, loss: 0.1035, accuracy: 0.8640
+Saved model to checkpoints/model_63.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 64 started
+Train Epoch: 64, loss: 0.21620
+Validation. Epoch: 64, loss: 0.1015, accuracy: 0.8660
+Saved model to checkpoints/model_64.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 65 started
+Train Epoch: 65, loss: 0.21508
+Validation. Epoch: 65, loss: 0.1043, accuracy: 0.8670
+Saved model to checkpoints/model_65.pth
+
+Train Epoch: 66 started
+Train Epoch: 66, loss: 0.21275
+Validation. Epoch: 66, loss: 0.1001, accuracy: 0.8670
+Saved model to checkpoints/model_66.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 67 started
+Train Epoch: 67, loss: 0.22066
+Validation. Epoch: 67, loss: 0.1031, accuracy: 0.8630
+Saved model to checkpoints/model_67.pth
+
+Train Epoch: 68 started
+Train Epoch: 68, loss: 0.20748
+Validation. Epoch: 68, loss: 0.1011, accuracy: 0.8630
+Saved model to checkpoints/model_68.pth
+
+Train Epoch: 69 started
+Train Epoch: 69, loss: 0.21035
+Validation. Epoch: 69, loss: 0.1014, accuracy: 0.8670
+Saved model to checkpoints/model_69.pth
+
+Train Epoch: 70 started
+Train Epoch: 70, loss: 0.20773
+Validation. Epoch: 70, loss: 0.0970, accuracy: 0.8630
+Saved model to checkpoints/model_70.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 71 started
+Train Epoch: 71, loss: 0.20442
+Validation. Epoch: 71, loss: 0.0976, accuracy: 0.8700
+Saved model to checkpoints/model_71.pth
+
+Train Epoch: 72 started
+Train Epoch: 72, loss: 0.20310
+Validation. Epoch: 72, loss: 0.1002, accuracy: 0.8610
+Saved model to checkpoints/model_72.pth
+
+Train Epoch: 73 started
+Train Epoch: 73, loss: 0.20370
+Validation. Epoch: 73, loss: 0.0998, accuracy: 0.8620
+Saved model to checkpoints/model_73.pth
+
+Train Epoch: 74 started
+Train Epoch: 74, loss: 0.18895
+Validation. Epoch: 74, loss: 0.1005, accuracy: 0.8630
+Saved model to checkpoints/model_74.pth
+
+Train Epoch: 75 started
+Train Epoch: 75, loss: 0.19495
+Validation. Epoch: 75, loss: 0.0988, accuracy: 0.8680
+Saved model to checkpoints/model_75.pth
+
+Train Epoch: 76 started
+Train Epoch: 76, loss: 0.19707
+Validation. Epoch: 76, loss: 0.1006, accuracy: 0.8640
+Saved model to checkpoints/model_76.pth
+
+Train Epoch: 77 started
+Train Epoch: 77, loss: 0.19464
+Validation. Epoch: 77, loss: 0.0955, accuracy: 0.8650
+Saved model to checkpoints/model_77.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 78 started
+Train Epoch: 78, loss: 0.19013
+Validation. Epoch: 78, loss: 0.0940, accuracy: 0.8720
+Saved model to checkpoints/model_78.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 79 started
+Train Epoch: 79, loss: 0.18659
+Validation. Epoch: 79, loss: 0.0945, accuracy: 0.8760
+Saved model to checkpoints/model_79.pth
+
+Train Epoch: 80 started
+Train Epoch: 80, loss: 0.19110
+Validation. Epoch: 80, loss: 0.0960, accuracy: 0.8740
+Saved model to checkpoints/model_80.pth
+
+Train Epoch: 81 started
+Train Epoch: 81, loss: 0.18722
+Validation. Epoch: 81, loss: 0.0946, accuracy: 0.8670
+Saved model to checkpoints/model_81.pth
+
+Train Epoch: 82 started
+Train Epoch: 82, loss: 0.18041
+Validation. Epoch: 82, loss: 0.0949, accuracy: 0.8730
+Saved model to checkpoints/model_82.pth
+
+Train Epoch: 83 started
+Train Epoch: 83, loss: 0.19341
+Validation. Epoch: 83, loss: 0.0915, accuracy: 0.8800
+Saved model to checkpoints/model_83.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 84 started
+Train Epoch: 84, loss: 0.17363
+Validation. Epoch: 84, loss: 0.0936, accuracy: 0.8750
+Saved model to checkpoints/model_84.pth
+
+Train Epoch: 85 started
+Train Epoch: 85, loss: 0.18424
+Validation. Epoch: 85, loss: 0.0934, accuracy: 0.8780
+Saved model to checkpoints/model_85.pth
+
+Train Epoch: 86 started
+Train Epoch: 86, loss: 0.16945
+Validation. Epoch: 86, loss: 0.0925, accuracy: 0.8760
+Saved model to checkpoints/model_86.pth
+
+Train Epoch: 87 started
+Train Epoch: 87, loss: 0.17923
+Validation. Epoch: 87, loss: 0.0933, accuracy: 0.8790
+Saved model to checkpoints/model_87.pth
+
+Train Epoch: 88 started
+Train Epoch: 88, loss: 0.17886
+Validation. Epoch: 88, loss: 0.0927, accuracy: 0.8770
+Saved model to checkpoints/model_88.pth
+
+Train Epoch: 89 started
+Train Epoch: 89, loss: 0.17218
+Validation. Epoch: 89, loss: 0.0928, accuracy: 0.8720
+Saved model to checkpoints/model_89.pth
+
+Train Epoch: 90 started
+Train Epoch: 90, loss: 0.17447
+Validation. Epoch: 90, loss: 0.0964, accuracy: 0.8600
+Saved model to checkpoints/model_90.pth
+
+Train Epoch: 91 started
+Train Epoch: 91, loss: 0.18307
+Validation. Epoch: 91, loss: 0.0904, accuracy: 0.8800
+Saved model to checkpoints/model_91.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 92 started
+Train Epoch: 92, loss: 0.18185
+Validation. Epoch: 92, loss: 0.0906, accuracy: 0.8810
+Saved model to checkpoints/model_92.pth
+
+Train Epoch: 93 started
+Train Epoch: 93, loss: 0.17529
+Validation. Epoch: 93, loss: 0.0909, accuracy: 0.8790
+Saved model to checkpoints/model_93.pth
+
+Train Epoch: 94 started
+Train Epoch: 94, loss: 0.16859
+Validation. Epoch: 94, loss: 0.0910, accuracy: 0.8750
+Saved model to checkpoints/model_94.pth
+
+Train Epoch: 95 started
+Train Epoch: 95, loss: 0.17246
+Validation. Epoch: 95, loss: 0.0867, accuracy: 0.8840
+Saved model to checkpoints/model_95.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 96 started
+Train Epoch: 96, loss: 0.16316
+Validation. Epoch: 96, loss: 0.0903, accuracy: 0.8820
+Saved model to checkpoints/model_96.pth
+
+Train Epoch: 97 started
+Train Epoch: 97, loss: 0.17396
+Validation. Epoch: 97, loss: 0.0893, accuracy: 0.8840
+Saved model to checkpoints/model_97.pth
+
+Train Epoch: 98 started
+Train Epoch: 98, loss: 0.15599
+Validation. Epoch: 98, loss: 0.0905, accuracy: 0.8820
+Saved model to checkpoints/model_98.pth
+
+Train Epoch: 99 started
+Train Epoch: 99, loss: 0.17073
+Validation. Epoch: 99, loss: 0.0894, accuracy: 0.8790
+Saved model to checkpoints/model_99.pth
+
+Train Epoch: 100 started
+Train Epoch: 100, loss: 0.15465
+Validation. Epoch: 100, loss: 0.0867, accuracy: 0.8830
+Saved model to checkpoints/model_100.pth
+
+Train Epoch: 101 started
+Train Epoch: 101, loss: 0.16965
+Validation. Epoch: 101, loss: 0.0880, accuracy: 0.8860
+Saved model to checkpoints/model_101.pth
+
+Train Epoch: 102 started
+Train Epoch: 102, loss: 0.16997
+Validation. Epoch: 102, loss: 0.0882, accuracy: 0.8820
+Saved model to checkpoints/model_102.pth
+
+Train Epoch: 103 started
+Train Epoch: 103, loss: 0.16832
+Validation. Epoch: 103, loss: 0.0862, accuracy: 0.8860
+Saved model to checkpoints/model_103.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 104 started
+Train Epoch: 104, loss: 0.16605
+Validation. Epoch: 104, loss: 0.0899, accuracy: 0.8780
+Saved model to checkpoints/model_104.pth
+
+Train Epoch: 105 started
+Train Epoch: 105, loss: 0.16925
+Validation. Epoch: 105, loss: 0.0878, accuracy: 0.8770
+Saved model to checkpoints/model_105.pth
+
+Train Epoch: 106 started
+Train Epoch: 106, loss: 0.15780
+Validation. Epoch: 106, loss: 0.0886, accuracy: 0.8840
+Saved model to checkpoints/model_106.pth
+
+Train Epoch: 107 started
+Train Epoch: 107, loss: 0.14982
+Validation. Epoch: 107, loss: 0.0891, accuracy: 0.8820
+Saved model to checkpoints/model_107.pth
+
+Train Epoch: 108 started
+Train Epoch: 108, loss: 0.15812
+Validation. Epoch: 108, loss: 0.0865, accuracy: 0.8790
+Saved model to checkpoints/model_108.pth
+
+Train Epoch: 109 started
+Train Epoch: 109, loss: 0.16063
+Validation. Epoch: 109, loss: 0.0868, accuracy: 0.8770
+Saved model to checkpoints/model_109.pth
+
+Train Epoch: 110 started
+Train Epoch: 110, loss: 0.16247
+Validation. Epoch: 110, loss: 0.0896, accuracy: 0.8700
+Saved model to checkpoints/model_110.pth
+
+Train Epoch: 111 started
+Train Epoch: 111, loss: 0.16067
+Validation. Epoch: 111, loss: 0.0862, accuracy: 0.8870
+Saved model to checkpoints/model_111.pth
+
+Train Epoch: 112 started
+Train Epoch: 112, loss: 0.15709
+Validation. Epoch: 112, loss: 0.0870, accuracy: 0.8830
+Saved model to checkpoints/model_112.pth
+
+Train Epoch: 113 started
+Train Epoch: 113, loss: 0.15975
+Validation. Epoch: 113, loss: 0.0872, accuracy: 0.8800
+Saved model to checkpoints/model_113.pth
+
+Train Epoch: 114 started
+Train Epoch: 114, loss: 0.16024
+Validation. Epoch: 114, loss: 0.0843, accuracy: 0.8830
+Saved model to checkpoints/model_114.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 115 started
+Train Epoch: 115, loss: 0.15110
+Validation. Epoch: 115, loss: 0.0877, accuracy: 0.8760
+Saved model to checkpoints/model_115.pth
+
+Train Epoch: 116 started
+Train Epoch: 116, loss: 0.14562
+Validation. Epoch: 116, loss: 0.0856, accuracy: 0.8840
+Saved model to checkpoints/model_116.pth
+
+Train Epoch: 117 started
+Train Epoch: 117, loss: 0.15318
+Validation. Epoch: 117, loss: 0.0842, accuracy: 0.8810
+Saved model to checkpoints/model_117.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 118 started
+Train Epoch: 118, loss: 0.14350
+Validation. Epoch: 118, loss: 0.0855, accuracy: 0.8810
+Saved model to checkpoints/model_118.pth
+
+Train Epoch: 119 started
+Train Epoch: 119, loss: 0.15010
+Validation. Epoch: 119, loss: 0.0860, accuracy: 0.8880
+Saved model to checkpoints/model_119.pth
+
+Train Epoch: 120 started
+Train Epoch: 120, loss: 0.15197
+Validation. Epoch: 120, loss: 0.0880, accuracy: 0.8850
+Saved model to checkpoints/model_120.pth
+
+Train Epoch: 121 started
+Train Epoch: 121, loss: 0.15158
+Validation. Epoch: 121, loss: 0.0868, accuracy: 0.8850
+Saved model to checkpoints/model_121.pth
+
+Train Epoch: 122 started
+Train Epoch: 122, loss: 0.14601
+Validation. Epoch: 122, loss: 0.0837, accuracy: 0.8900
+Saved model to checkpoints/model_122.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 123 started
+Train Epoch: 123, loss: 0.14691
+Validation. Epoch: 123, loss: 0.0839, accuracy: 0.8860
+Saved model to checkpoints/model_123.pth
+
+Train Epoch: 124 started
+Train Epoch: 124, loss: 0.14600
+Validation. Epoch: 124, loss: 0.0836, accuracy: 0.8940
+Saved model to checkpoints/model_124.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 125 started
+Train Epoch: 125, loss: 0.14945
+Validation. Epoch: 125, loss: 0.0841, accuracy: 0.8850
+Saved model to checkpoints/model_125.pth
+
+Train Epoch: 126 started
+Train Epoch: 126, loss: 0.14612
+Validation. Epoch: 126, loss: 0.0853, accuracy: 0.8830
+Saved model to checkpoints/model_126.pth
+
+Train Epoch: 127 started
+Train Epoch: 127, loss: 0.15432
+Validation. Epoch: 127, loss: 0.0838, accuracy: 0.8800
+Saved model to checkpoints/model_127.pth
+
+Train Epoch: 128 started
+Train Epoch: 128, loss: 0.14107
+Validation. Epoch: 128, loss: 0.0842, accuracy: 0.8880
+Saved model to checkpoints/model_128.pth
+
+Train Epoch: 129 started
+Train Epoch: 129, loss: 0.14750
+Validation. Epoch: 129, loss: 0.0815, accuracy: 0.8900
+Saved model to checkpoints/model_129.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 130 started
+Train Epoch: 130, loss: 0.14990
+Validation. Epoch: 130, loss: 0.0834, accuracy: 0.8880
+Saved model to checkpoints/model_130.pth
+
+Train Epoch: 131 started
+Train Epoch: 131, loss: 0.13721
+Validation. Epoch: 131, loss: 0.0839, accuracy: 0.8790
+Saved model to checkpoints/model_131.pth
+
+Train Epoch: 132 started
+Train Epoch: 132, loss: 0.13873
+Validation. Epoch: 132, loss: 0.0837, accuracy: 0.8870
+Saved model to checkpoints/model_132.pth
+
+Train Epoch: 133 started
+Train Epoch: 133, loss: 0.14370
+Validation. Epoch: 133, loss: 0.0830, accuracy: 0.8860
+Saved model to checkpoints/model_133.pth
+
+Train Epoch: 134 started
+Train Epoch: 134, loss: 0.13661
+Validation. Epoch: 134, loss: 0.0853, accuracy: 0.8850
+Saved model to checkpoints/model_134.pth
+
+Train Epoch: 135 started
+Train Epoch: 135, loss: 0.14516
+Validation. Epoch: 135, loss: 0.0843, accuracy: 0.8840
+Saved model to checkpoints/model_135.pth
+
+Train Epoch: 136 started
+Train Epoch: 136, loss: 0.14325
+Validation. Epoch: 136, loss: 0.0848, accuracy: 0.8820
+Saved model to checkpoints/model_136.pth
+
+Train Epoch: 137 started
+Train Epoch: 137, loss: 0.14225
+Validation. Epoch: 137, loss: 0.0813, accuracy: 0.8910
+Saved model to checkpoints/model_137.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 138 started
+Train Epoch: 138, loss: 0.14576
+Validation. Epoch: 138, loss: 0.0821, accuracy: 0.8880
+Saved model to checkpoints/model_138.pth
+
+Train Epoch: 139 started
+Train Epoch: 139, loss: 0.14192
+Validation. Epoch: 139, loss: 0.0824, accuracy: 0.8870
+Saved model to checkpoints/model_139.pth
+
+Train Epoch: 140 started
+Train Epoch: 140, loss: 0.14356
+Validation. Epoch: 140, loss: 0.0845, accuracy: 0.8870
+Saved model to checkpoints/model_140.pth
+
+Train Epoch: 141 started
+Train Epoch: 141, loss: 0.13041
+Validation. Epoch: 141, loss: 0.0856, accuracy: 0.8860
+Saved model to checkpoints/model_141.pth
+
+Train Epoch: 142 started
+Train Epoch: 142, loss: 0.13514
+Validation. Epoch: 142, loss: 0.0810, accuracy: 0.8920
+Saved model to checkpoints/model_142.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 143 started
+Train Epoch: 143, loss: 0.14003
+Validation. Epoch: 143, loss: 0.0839, accuracy: 0.8840
+Saved model to checkpoints/model_143.pth
+
+Train Epoch: 144 started
+Train Epoch: 144, loss: 0.12759
+Validation. Epoch: 144, loss: 0.0836, accuracy: 0.8900
+Saved model to checkpoints/model_144.pth
+
+Train Epoch: 145 started
+Train Epoch: 145, loss: 0.13145
+Validation. Epoch: 145, loss: 0.0802, accuracy: 0.8920
+Saved model to checkpoints/model_145.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 146 started
+Train Epoch: 146, loss: 0.14418
+Validation. Epoch: 146, loss: 0.0841, accuracy: 0.8880
+Saved model to checkpoints/model_146.pth
+
+Train Epoch: 147 started
+Train Epoch: 147, loss: 0.14068
+Validation. Epoch: 147, loss: 0.0814, accuracy: 0.8880
+Saved model to checkpoints/model_147.pth
+
+Train Epoch: 148 started
+Train Epoch: 148, loss: 0.13438
+Validation. Epoch: 148, loss: 0.0820, accuracy: 0.8920
+Saved model to checkpoints/model_148.pth
+
+Train Epoch: 149 started
+Train Epoch: 149, loss: 0.13484
+Validation. Epoch: 149, loss: 0.0828, accuracy: 0.8790
+Saved model to checkpoints/model_149.pth
+
+Train Epoch: 150 started
+Train Epoch: 150, loss: 0.12929
+Validation. Epoch: 150, loss: 0.0826, accuracy: 0.8880
+Saved model to checkpoints/model_150.pth
+
+Train Epoch: 151 started
+Train Epoch: 151, loss: 0.13207
+Validation. Epoch: 151, loss: 0.0792, accuracy: 0.8940
+Saved model to checkpoints/model_151.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 152 started
+Train Epoch: 152, loss: 0.14072
+Validation. Epoch: 152, loss: 0.0799, accuracy: 0.8840
+Saved model to checkpoints/model_152.pth
+
+Train Epoch: 153 started
+Train Epoch: 153, loss: 0.13457
+Validation. Epoch: 153, loss: 0.0795, accuracy: 0.8900
+Saved model to checkpoints/model_153.pth
+
+Train Epoch: 154 started
+Train Epoch: 154, loss: 0.12429
+Validation. Epoch: 154, loss: 0.0805, accuracy: 0.8860
+Saved model to checkpoints/model_154.pth
+
+Train Epoch: 155 started
+Train Epoch: 155, loss: 0.12738
+Validation. Epoch: 155, loss: 0.0813, accuracy: 0.8910
+Saved model to checkpoints/model_155.pth
+
+Train Epoch: 156 started
+Train Epoch: 156, loss: 0.12862
+Validation. Epoch: 156, loss: 0.0794, accuracy: 0.8870
+Saved model to checkpoints/model_156.pth
+
+Train Epoch: 157 started
+Train Epoch: 157, loss: 0.13211
+Validation. Epoch: 157, loss: 0.0809, accuracy: 0.8920
+Saved model to checkpoints/model_157.pth
+
+Train Epoch: 158 started
+Train Epoch: 158, loss: 0.12223
+Validation. Epoch: 158, loss: 0.0813, accuracy: 0.8880
+Saved model to checkpoints/model_158.pth
+
+Train Epoch: 159 started
+Train Epoch: 159, loss: 0.13122
+Validation. Epoch: 159, loss: 0.0796, accuracy: 0.8920
+Saved model to checkpoints/model_159.pth
+
+Train Epoch: 160 started
+Train Epoch: 160, loss: 0.12969
+Validation. Epoch: 160, loss: 0.0799, accuracy: 0.8910
+Saved model to checkpoints/model_160.pth
+
+Train Epoch: 161 started
+Train Epoch: 161, loss: 0.13082
+Validation. Epoch: 161, loss: 0.0781, accuracy: 0.8920
+Saved model to checkpoints/model_161.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 162 started
+Train Epoch: 162, loss: 0.12272
+Validation. Epoch: 162, loss: 0.0815, accuracy: 0.8890
+Saved model to checkpoints/model_162.pth
+
+Train Epoch: 163 started
+Train Epoch: 163, loss: 0.12355
+Validation. Epoch: 163, loss: 0.0780, accuracy: 0.8880
+Saved model to checkpoints/model_163.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 164 started
+Train Epoch: 164, loss: 0.12387
+Validation. Epoch: 164, loss: 0.0829, accuracy: 0.8870
+Saved model to checkpoints/model_164.pth
+
+Train Epoch: 165 started
+Train Epoch: 165, loss: 0.13739
+Validation. Epoch: 165, loss: 0.0785, accuracy: 0.8940
+Saved model to checkpoints/model_165.pth
+
+Train Epoch: 166 started
+Train Epoch: 166, loss: 0.11888
+Validation. Epoch: 166, loss: 0.0807, accuracy: 0.8860
+Saved model to checkpoints/model_166.pth
+
+Train Epoch: 167 started
+Train Epoch: 167, loss: 0.12334
+Validation. Epoch: 167, loss: 0.0798, accuracy: 0.8910
+Saved model to checkpoints/model_167.pth
+
+Train Epoch: 168 started
+Train Epoch: 168, loss: 0.12500
+Validation. Epoch: 168, loss: 0.0793, accuracy: 0.8890
+Saved model to checkpoints/model_168.pth
+
+Train Epoch: 169 started
+Train Epoch: 169, loss: 0.12007
+Validation. Epoch: 169, loss: 0.0782, accuracy: 0.8930
+Saved model to checkpoints/model_169.pth
+
+Train Epoch: 170 started
+Train Epoch: 170, loss: 0.12036
+Validation. Epoch: 170, loss: 0.0796, accuracy: 0.8850
+Saved model to checkpoints/model_170.pth
+
+Train Epoch: 171 started
+Train Epoch: 171, loss: 0.12700
+Validation. Epoch: 171, loss: 0.0795, accuracy: 0.8900
+Saved model to checkpoints/model_171.pth
+
+Train Epoch: 172 started
+Train Epoch: 172, loss: 0.12145
+Validation. Epoch: 172, loss: 0.0805, accuracy: 0.8890
+Saved model to checkpoints/model_172.pth
+
+Train Epoch: 173 started
+Train Epoch: 173, loss: 0.12280
+Validation. Epoch: 173, loss: 0.0796, accuracy: 0.8870
+Saved model to checkpoints/model_173.pth
+
+Train Epoch: 174 started
+Train Epoch: 174, loss: 0.11919
+Validation. Epoch: 174, loss: 0.0832, accuracy: 0.8890
+Saved model to checkpoints/model_174.pth
+
+Train Epoch: 175 started
+Train Epoch: 175, loss: 0.11835
+Validation. Epoch: 175, loss: 0.0790, accuracy: 0.8890
+Saved model to checkpoints/model_175.pth
+
+Train Epoch: 176 started
+Train Epoch: 176, loss: 0.12473
+Validation. Epoch: 176, loss: 0.0807, accuracy: 0.9000
+Saved model to checkpoints/model_176.pth
+
+Train Epoch: 177 started
+Train Epoch: 177, loss: 0.13449
+Validation. Epoch: 177, loss: 0.0766, accuracy: 0.9000
+Saved model to checkpoints/model_177.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 178 started
+Train Epoch: 178, loss: 0.11882
+Validation. Epoch: 178, loss: 0.0816, accuracy: 0.8900
+Saved model to checkpoints/model_178.pth
+
+Train Epoch: 179 started
+Train Epoch: 179, loss: 0.13228
+Validation. Epoch: 179, loss: 0.0793, accuracy: 0.8920
+Saved model to checkpoints/model_179.pth
+
+Train Epoch: 180 started
+Train Epoch: 180, loss: 0.12961
+Validation. Epoch: 180, loss: 0.0796, accuracy: 0.8930
+Saved model to checkpoints/model_180.pth
+
+Train Epoch: 181 started
+Train Epoch: 181, loss: 0.11944
+Validation. Epoch: 181, loss: 0.0758, accuracy: 0.8930
+Saved model to checkpoints/model_181.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 182 started
+Train Epoch: 182, loss: 0.11692
+Validation. Epoch: 182, loss: 0.0780, accuracy: 0.8880
+Saved model to checkpoints/model_182.pth
+
+Train Epoch: 183 started
+Train Epoch: 183, loss: 0.11532
+Validation. Epoch: 183, loss: 0.0801, accuracy: 0.8870
+Saved model to checkpoints/model_183.pth
+
+Train Epoch: 184 started
+Train Epoch: 184, loss: 0.11611
+Validation. Epoch: 184, loss: 0.0774, accuracy: 0.8910
+Saved model to checkpoints/model_184.pth
+
+Train Epoch: 185 started
+Train Epoch: 185, loss: 0.11674
+Validation. Epoch: 185, loss: 0.0786, accuracy: 0.8880
+Saved model to checkpoints/model_185.pth
+
+Train Epoch: 186 started
+Train Epoch: 186, loss: 0.11007
+Validation. Epoch: 186, loss: 0.0787, accuracy: 0.8960
+Saved model to checkpoints/model_186.pth
+
+Train Epoch: 187 started
+Train Epoch: 187, loss: 0.11596
+Validation. Epoch: 187, loss: 0.0790, accuracy: 0.8980
+Saved model to checkpoints/model_187.pth
+
+Train Epoch: 188 started
+Train Epoch: 188, loss: 0.11655
+Validation. Epoch: 188, loss: 0.0790, accuracy: 0.9000
+Saved model to checkpoints/model_188.pth
+
+Train Epoch: 189 started
+Train Epoch: 189, loss: 0.11731
+Validation. Epoch: 189, loss: 0.0796, accuracy: 0.8920
+Saved model to checkpoints/model_189.pth
+
+Train Epoch: 190 started
+Train Epoch: 190, loss: 0.10842
+Validation. Epoch: 190, loss: 0.0778, accuracy: 0.8950
+Saved model to checkpoints/model_190.pth
+
+Train Epoch: 191 started
+Train Epoch: 191, loss: 0.11107
+Validation. Epoch: 191, loss: 0.0766, accuracy: 0.9000
+Saved model to checkpoints/model_191.pth
+
+Train Epoch: 192 started
+Train Epoch: 192, loss: 0.12145
+Validation. Epoch: 192, loss: 0.0832, accuracy: 0.8960
+Saved model to checkpoints/model_192.pth
+
+Train Epoch: 193 started
+Train Epoch: 193, loss: 0.12421
+Validation. Epoch: 193, loss: 0.0771, accuracy: 0.8980
+Saved model to checkpoints/model_193.pth
+
+Train Epoch: 194 started
+Train Epoch: 194, loss: 0.11295
+Validation. Epoch: 194, loss: 0.0780, accuracy: 0.8960
+Saved model to checkpoints/model_194.pth
+
+Train Epoch: 195 started
+Train Epoch: 195, loss: 0.11384
+Validation. Epoch: 195, loss: 0.0777, accuracy: 0.8960
+Saved model to checkpoints/model_195.pth
+
+Train Epoch: 196 started
+Train Epoch: 196, loss: 0.10602
+Validation. Epoch: 196, loss: 0.0787, accuracy: 0.8980
+Saved model to checkpoints/model_196.pth
+
+Train Epoch: 197 started
+Train Epoch: 197, loss: 0.11489
+Validation. Epoch: 197, loss: 0.0778, accuracy: 0.8990
+Saved model to checkpoints/model_197.pth
+
+Train Epoch: 198 started
+Train Epoch: 198, loss: 0.12039
+Validation. Epoch: 198, loss: 0.0791, accuracy: 0.8950
+Saved model to checkpoints/model_198.pth
+
+Train Epoch: 199 started
+Train Epoch: 199, loss: 0.12288
+Validation. Epoch: 199, loss: 0.0757, accuracy: 0.9010
+Saved model to checkpoints/model_199.pth
+New best Loss, saved to checkpoints/model_best.pth
+
+Train Epoch: 200 started
+Train Epoch: 200, loss: 0.11221
+Validation. Epoch: 200, loss: 0.0797, accuracy: 0.8910
+Saved model to checkpoints/model_200.pth
+
+Finished training, best model on validation set:  199
+
+Process finished with exit code 0
