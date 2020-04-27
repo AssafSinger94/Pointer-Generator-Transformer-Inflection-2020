@@ -1,20 +1,23 @@
+import math
+
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.init import xavier_uniform_
 from torch.nn import TransformerEncoder, TransformerEncoderLayer
-from model_utils import _generate_square_subsequent_mask, Embedding, PositionalEncoding
+from model_utils import _generate_square_subsequent_mask, Embedding, SinusoidalPositionalEmbedding#, PositionalEncoding
 from tokenizer import PAD_ID
 
 class Transformer(nn.Module):
-    def __init__(self, src_vocab_size=128, tgt_vocab_size=128,
-                 embedding_dim=128, fcn_hidden_dim=128,
-                 num_heads=4, num_layers=2, dropout=0.2):
+    def __init__(self, src_vocab_size, tgt_vocab_size, embedding_dim, fcn_hidden_dim, num_heads, num_layers, dropout=0.1):
         super(Transformer, self).__init__()
 
         self.embedding_dim = embedding_dim
         # Source and Encoder layers
         self.src_embed = Embedding(src_vocab_size, embedding_dim, padding_idx=PAD_ID)
-        self.src_pos_encoder = PositionalEncoding(embedding_dim)
+        # ------------
+        # self.src_pos_encoder = PositionalEncoding(embedding_dim)
+        self.src_pos_encoder = SinusoidalPositionalEmbedding(embedding_dim, PAD_ID)
+        # ------------
         encoder_layer = TransformerEncoderLayer(d_model=embedding_dim, nhead=num_heads,
                                                    dim_feedforward=fcn_hidden_dim, dropout=dropout)
         encoder_norm = nn.LayerNorm(embedding_dim)
@@ -22,7 +25,10 @@ class Transformer(nn.Module):
 
         # Target and Decoder layers
         self.tgt_embed = Embedding(tgt_vocab_size, embedding_dim, padding_idx=PAD_ID)
-        self.tgt_pos_encoder = PositionalEncoding(embedding_dim)
+        # ------------
+        # self.tgt_pos_encoder = PositionalEncoding(embedding_dim)
+        self.tgt_pos_encoder = SinusoidalPositionalEmbedding(embedding_dim, PAD_ID)
+        # ------------
         decoder_layer = nn.TransformerDecoderLayer(d_model=embedding_dim, nhead=num_heads,
                                                    dim_feedforward=fcn_hidden_dim, dropout=dropout)
         decoder_norm = nn.LayerNorm(embedding_dim)
@@ -30,6 +36,7 @@ class Transformer(nn.Module):
         # Final linear layer
         self.final_out = nn.Linear(embedding_dim, tgt_vocab_size)
 
+        self.dropout = nn.Dropout(dropout)
         # Initialize masks
         self.src_mask = None
         self.tgt_mask = None
@@ -52,8 +59,10 @@ class Transformer(nn.Module):
         :return: memory- the encoder hidden states
         """
         # Source embedding and positional encoding, changes dimension (N, S) -> (N, S, E) -> (S, N, E)
-        src_embed = self.src_embed(src).transpose(0, 1)
-        src_embed = self.src_pos_encoder(src_embed)
+        src_embed = self.src_embed(src).transpose(0, 1)#* math.sqrt(self.embedding_dim)
+
+        # src_embed = self.src_pos_encoder(src_embed)
+        src_embed = self.dropout(src_embed + self.src_pos_encoder(src.transpose(0, 1)))
         # Pass the source to the encoder
         memory = self.encoder(src_embed, mask=self.src_mask, src_key_padding_mask=src_key_padding_mask)
         return memory
@@ -76,8 +85,9 @@ class Transformer(nn.Module):
         else:
             self.tgt_mask = None
         # Target embedding and positional encoding, changes dimension (N, T) -> (N, T, E) -> (T, N, E)
-        tgt_embed = self.tgt_embed(tgt).transpose(0, 1)
-        tgt_embed = self.tgt_pos_encoder(tgt_embed)
+        tgt_embed = self.tgt_embed(tgt).transpose(0, 1)# * math.sqrt(self.embedding_dim)
+        # tgt_embed = self.tgt_pos_encoder(tgt_embed)
+        tgt_embed = self.dropout(tgt_embed + self.tgt_pos_encoder(tgt.transpose(0, 1)))
         # Get output of decoder. Dimensions stay the same
         decoder_output = self.decoder(tgt_embed, memory, tgt_mask=self.tgt_mask, memory_mask=self.mem_mask,
                                       tgt_key_padding_mask=tgt_key_padding_mask,

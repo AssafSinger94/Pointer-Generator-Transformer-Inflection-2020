@@ -4,8 +4,6 @@ import tokenizer
 """Allows reading of conll files. Reads conll file, and 1) Splits it by different components of each examples, 
 and also 2) Separates it to to input tokens and target tokens. conll: lemma-tab-target-tab-features """
 
-""" CONSTANTS """
-DATA_FOLDER = 'data'
 
 """ READING FILES """
 def read_morph_file(morph_file_path):

@@ -2,15 +2,81 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d375a0ca-d981-4f34-8067-71cef9e79afe" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/augment.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Performance of models/Loss - Pointer Generator - Low.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Performance of models/Loss - Pointer Generator - Medium.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Performance of models/Loss - Transformer - Low.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Performance of models/Loss - fairseq.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Performance of models/Loss - transformer.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Performance of models/Performance Review.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Relevant Information/TransformerModel settings.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Relevant Information/fairseq - TransformerModel settings.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/model_best.pth" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/model_best.pth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/arabic-train-medium" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate.py" beforeDir="false" afterPath="$PROJECT_DIR$/generate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/train-log-pointer_generator-low-english.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/train-log-pointer_generator-low-french.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/train-log-pointer_generator-low-hebrew.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/train-log-pointer_generator-low-irish.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/train-log-pointer_generator-low-italian.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/train-log-pointer_generator-low-spanish.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/train-log-transformer-low-english.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/train-log-transformer-low-french.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/train-log-transformer-low-hebrew.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/train-log-transformer-low-irish.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/train-log-transformer-low-italian.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/train-log-transformer-low-spanish.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model-checkpoints/pointer_generator/english/low/model_best.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model-checkpoints/pointer_generator/french/low/model_best.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model-checkpoints/pointer_generator/hebrew/low/model_best.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model-checkpoints/pointer_generator/irish/low/model_best.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model-checkpoints/pointer_generator/italian/low/model_best.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model-checkpoints/pointer_generator/spanish/low/model_best.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model-checkpoints/transformer/english/low/model_best.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model-checkpoints/transformer/french/low/model_best.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model-checkpoints/transformer/hebrew/low/model_best.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model-checkpoints/transformer/irish/low/model_best.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model-checkpoints/transformer/italian/low/model_best.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model-checkpoints/transformer/spanish/low/model_best.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pointer_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/pointer_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictions/pointer_generator/english-low-test-pred" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictions/pointer_generator/french-low-test-pred" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictions/pointer_generator/hebrew-low-test-pred" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictions/pointer_generator/irish-low-test-pred" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictions/pointer_generator/italian-low-test-pred" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictions/pointer_generator/spanish-low-test-pred" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictions/transformer/english-low-test-pred" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictions/transformer/french-low-test-pred" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictions/transformer/hebrew-low-test-pred" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictions/transformer/irish-low-test-pred" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictions/transformer/italian-low-test-pred" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictions/transformer/spanish-low-test-pred" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokenizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/tokenizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vocab/hebrew/low/hebrew-train-low-vocab-input" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vocab/hebrew/low/hebrew-train-low-vocab-output" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vocabulary.py" beforeDir="false" afterPath="$PROJECT_DIR$/vocabulary.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -19,7 +85,8 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Test/neural-transducer" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -33,6 +100,134 @@
       </list>
     </option>
   </component>
+  <component name="RunManager" selected="Python.train">
+    <configuration name="augment" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="transformer" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/augment.py" />
+      <option name="PARAMETERS" value="--src task0-data/ang.trn --out task0-data/ang-aug.trn" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="generate" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="transformer" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/generate.py" />
+      <option name="PARAMETERS" value="--model-checkpoint &quot;checkpoints/model_40.pth&quot; --arch transformer --embed-dim 256 --fcn-dim 64 --dropout 0.3 --num-layers 2 --num-heads 4 --test &quot;data/english-covered-dev&quot; --vocab &quot;vocab/english/low/english-train-low-vocab&quot; --pred &quot;data/english-test-pred-low&quot;" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="hyperparameter_search" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="transformer" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/hyperparameter_search.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="transformer" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train.py" />
+      <option name="PARAMETERS" value="--train &quot;data/english-train-low&quot; --dev &quot;data/english-dev&quot; --vocab &quot;vocab/english/low/english-train-low-vocab&quot; --checkpoints-dir &quot;checkpoints&quot; --resume True --batch-size 100 --epochs 60 --eval-every 1 --arch transformer --embed-dim 256 --fcn-dim 64 --dropout 0.3 --num-layers 2 --num-heads 4 --lr 0.001 --beta2 0.98 --scheduler warmupinvsqr --min-lr 1e-5 --warmup-steps 4000 --discount-factor 0.5 --patience 20" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="vocabulary" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="transformer" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/vocabulary.py" />
+      <option name="PARAMETERS" value="--src task0-data/ang.trn --vocab task0-vocab/ang-vocab" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.train" />
+      <item itemvalue="Python.hyperparameter_search" />
+      <item itemvalue="Python.vocabulary" />
+      <item itemvalue="Python.generate" />
+      <item itemvalue="Python.augment" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.augment" />
+        <item itemvalue="Python.generate" />
+        <item itemvalue="Python.train" />
+        <item itemvalue="Python.vocabulary" />
+        <item itemvalue="Python.hyperparameter_search" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -45,7 +240,19 @@
       <updated>1584026513429</updated>
       <workItem from="1584026519684" duration="1049000" />
       <workItem from="1584029073319" duration="72000" />
-      <workItem from="1584133164532" duration="865000" />
+      <workItem from="1584133164532" duration="11456000" />
+      <workItem from="1584457360323" duration="9069000" />
+      <workItem from="1586687618424" duration="317000" />
+      <workItem from="1586698966305" duration="36200000" />
+      <workItem from="1586981364587" duration="35398000" />
+      <workItem from="1587199591369" duration="24032000" />
+      <workItem from="1587232187170" duration="3955000" />
+      <workItem from="1587319518577" duration="30899000" />
+      <workItem from="1587553462012" duration="47000" />
+      <workItem from="1587553783978" duration="36187000" />
+      <workItem from="1587719696412" duration="31628000" />
+      <workItem from="1587820104757" duration="756000" />
+      <workItem from="1587893732117" duration="24683000" />
     </task>
     <servers />
   </component>
@@ -64,5 +271,37 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/utils.py</url>
+          <line>78</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/generate.py</url>
+          <line>65</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="__exception__" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/transformer$vocabulary.coverage" NAME="vocabulary Coverage Results" MODIFIED="1587666866145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/transformer$train.coverage" NAME="train Coverage Results" MODIFIED="1587926584637" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/transformer$augment.coverage" NAME="augment Coverage Results" MODIFIED="1587983960125" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/transformer$main.coverage" NAME="main Coverage Results" MODIFIED="1586944935902" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/transformer$run_models.coverage" NAME="run_models Coverage Results" MODIFIED="1587477155085" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/transformer$evaluate.coverage" NAME="evaluate Coverage Results" MODIFIED="1587377913380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/transformer$generate.coverage" NAME="generate Coverage Results" MODIFIED="1587926859587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/transformer$train_old.coverage" NAME="train_old Coverage Results" MODIFIED="1586948653680" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/transformer$hyperparameter_search.coverage" NAME="hyperparameter_search Coverage Results" MODIFIED="1587639473843" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

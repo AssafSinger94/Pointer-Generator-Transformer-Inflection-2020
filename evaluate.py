@@ -1,21 +1,21 @@
 import argparse
-import os
-
 import data
-from data import DATA_FOLDER
 
 # Arguments
+import utils
+
 parser = argparse.ArgumentParser(description='Computing accuracy of model predictions compare to target file')
-parser.add_argument('--pred-file', type=str, default='data/pred', metavar='S',
+parser.add_argument('--pred', type=str, default='data/pred',
                     help="File with model predictions (must include folder path)")
-parser.add_argument('--target-file', type=str, default='target', metavar='S',
-                    help="File with gold targets (File is located in DATA_FOLDER)")
+parser.add_argument('--target', type=str, default='target',
+                    help="File with gold targets (must include folder path)")
 args = parser.parse_args()
 
-""" Files """
-# Get validation and test file path
-pred_file_path = os.path.join(args.pred_file)
-target_file_path = os.path.join(DATA_FOLDER, args.target_file)
+# Log all relevant files
+logger = utils.get_logger()
+logger.info(f"Target file: {args.target}")
+logger.info(f"Prediction file: {args.pred}")
+
 
 """ FUNCTIONS """
 def accuracy(predictions, targets):
@@ -24,26 +24,20 @@ def accuracy(predictions, targets):
     for prediction, target in zip(predictions, targets):
         if prediction == target:
             correct_count += 1
-    return correct_count / len(predictions)
+    return float(100 * correct_count) / len(predictions)
 
-"""Version with words NOT cleaned"""
 def evaluate_predictions(pred_file, target_file):
+    """Compute prediction. words NOT cleaned"""
     pred_lines = data.read_morph_file(pred_file)
     target_lines = data.read_morph_file(target_file)
     predictions = [line[1] for line in pred_lines]
     truth = [line[1] for line in target_lines]
-    print("Test set. accuracy: %.4f" % accuracy(predictions, truth))
+    total_accuracy = accuracy(predictions, truth)
+    logger.info(f"Test set. accuracy: {total_accuracy:.2f}\n")
+    return total_accuracy
 
 
 if __name__ == '__main__':
     # Compute accuracy of predictions compare to truth
-    evaluate_predictions(pred_file_path, target_file_path)
+    evaluate_predictions(args.pred, args.target)
 
-# __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-# pred_file_path = os.path.join(__location__, DATA_FOLDER, args.pred_file)
-# target_file_path = os.path.join(__location__, DATA_FOLDER, args.target_file)
-# """Version with words cleaned"""
-# def evaluate_predictions(pred_file, target_file):
-#     _, predictions, _ = data.read_train_file(pred_file)
-#     _, truth, _ = data.read_train_file(target_file)
-#     print("Test set. accuracy: %.4f" % accuracy(predictions, truth))

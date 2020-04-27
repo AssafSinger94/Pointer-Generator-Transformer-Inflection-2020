@@ -1,6 +1,10 @@
 import collections
 
 import torch
+PAD_ID = 0
+SOS_ID = 1
+EOS_ID = 2
+UNK_ID = 3
 
 
 def load_vocab(vocab_file_path, sos, eos, pad, unk):
@@ -10,10 +14,10 @@ def load_vocab(vocab_file_path, sos, eos, pad, unk):
 
     vocab = collections.OrderedDict()
     # First, add special signs for sos, eos and pad to vocabulary
-    vocab[sos] = 0
-    vocab[eos] = 1
-    vocab[pad] = 2
-    vocab[unk] = 3
+    vocab[pad] = PAD_ID
+    vocab[sos] = SOS_ID
+    vocab[eos] = EOS_ID
+    vocab[unk] = UNK_ID
     # For each valid line, Get token and index of line
     for index, line in enumerate(lines):
         if line != "\n":
@@ -45,61 +49,57 @@ def tokenize_features(features_list):
 class Tokenizer(object):
     """ Tokenizer object. Handles tokenizing sentences, converting tokens to ids and vice versa"""
 
-    def __init__(self, input_vocab_file_path, output_vocab_file_path):
+    def __init__(self, src_vocab_file_path, tgt_vocab_file_path, device):
         self.sos = "<s>"
         self.eos = "</s>"
         self.pad = "<pad>"
         self.unk = "<unk>"
-        self.sos_id = 0
-        self.eos_id = 1
-        self.pad_id = 2
-        self.unk_id = 3
+        self.pad_id = PAD_ID
+        self.sos_id = SOS_ID
+        self.eos_id = EOS_ID
+        self.unk_id = UNK_ID
 
-        self.input_vocab = load_vocab(input_vocab_file_path, self.sos,
+        self.device = device
+
+        self.src_vocab = load_vocab(src_vocab_file_path, self.sos,
                                       self.eos, self.pad, self.unk)  # vocabulary of all token->id in the input
-        self.inv_input_vocab = {v: k for k, v in self.input_vocab.items()}  # reverse vocabulary of input, id->token
-        self.output_vocab = load_vocab(output_vocab_file_path, self.sos,
+        self.inv_src_vocab = {v: k for k, v in self.src_vocab.items()}  # reverse vocabulary of input, id->token
+        self.src_vocab_size = len(self.src_vocab)
+        self.tgt_vocab = load_vocab(tgt_vocab_file_path, self.sos,
                                        self.eos, self.pad, self.unk)  # vocabulary of all token->id in the output
-        self.inv_output_vocab = {v: k for k, v in self.output_vocab.items()}  # reverse vocabulary of output, id->token
+        self.inv_tgt_vocab = {v: k for k, v in self.tgt_vocab.items()}  # reverse vocabulary of output, id->token
+        self.tgt_vocab_size = len(self.tgt_vocab)
 
-        self.input_to_output_vocab_conversion_matrix = self.get_src_to_tgt_vocab_conversion_matrix()
+        self.src_to_tgt_vocab_conversion_matrix = self.get_src_to_tgt_vocab_conversion_matrix()
 
     def add_sequence_symbols(self, tokens_list):
         """ Adds eos and sos symbols to each sequence of tokens"""
         return [[self.sos] + tokens + [self.eos] for tokens in tokens_list]
 
-    def convert_input_tokens_to_ids(self, tokens):
+    def convert_src_tokens_to_ids(self, tokens):
         """ Converts all given tokens to ids using the input vocabulary"""
-        return convert_by_vocab(self.input_vocab, tokens, self.unk_id)
+        return convert_by_vocab(self.src_vocab, tokens, self.unk_id)
 
-    def convert_input_ids_to_tokens(self, ids):
+    def convert_src_ids_to_tokens(self, ids):
         """ Converts all given ids to tokens using the input vocabulary"""
-        return convert_by_vocab(self.inv_input_vocab, ids, self.unk)
+        return convert_by_vocab(self.inv_src_vocab, ids, self.unk)
 
-    def get_input_vocab_size(self):
-        """ Returns size of input vocabulary """
-        return len(self.input_vocab)
-
-    def convert_output_tokens_to_ids(self, tokens):
+    def convert_tgt_tokens_to_ids(self, tokens):
         """ Converts all given tokens to the ids using the output vocabulary"""
-        return convert_by_vocab(self.output_vocab, tokens, self.unk_id)
+        return convert_by_vocab(self.tgt_vocab, tokens, self.unk_id)
 
-    def convert_output_ids_to_tokens(self, ids):
+    def convert_tgt_ids_to_tokens(self, ids):
         """ Converts all given tokens to the ids using the output vocabulary"""
-        return convert_by_vocab(self.inv_output_vocab, ids, self.unk)
+        return convert_by_vocab(self.inv_tgt_vocab, ids, self.unk)
 
-    def get_output_vocab_size(self):
-        """ Returns size of output vocabulary """
-        return len(self.output_vocab)
-
-    def get_id_tensors(self, tokens_list, device, vocab_type):
+    def get_id_tensors(self, tokens_list, vocab_type):
         """ Gets list of token sequences, and converts each token sequence to tensor of ids, using the tokenizer
             device to determine tensor device type, and vocab type is either "INPUT" or "OUTPUT" """
         if vocab_type == "INPUT":
-            return [torch.tensor(self.convert_input_tokens_to_ids(tokens), dtype=torch.long, device=device)
+            return [torch.tensor(self.convert_src_tokens_to_ids(tokens), dtype=torch.long, device=self.device)
                     for tokens in tokens_list]
         else:
-            return [torch.tensor(self.convert_output_tokens_to_ids(tokens), dtype=torch.long, device=device)
+            return [torch.tensor(self.convert_tgt_tokens_to_ids(tokens), dtype=torch.long, device=self.device)
                     for tokens in tokens_list]
 
     def pad_tokens_sequence(self, tokens, max_seq_len):
@@ -111,11 +111,11 @@ class Tokenizer(object):
 
     def get_src_to_tgt_vocab_conversion_matrix(self):
         # Initialize conversion matrix
-        src_to_tgt_conversion_matrix = torch.zeros(self.get_input_vocab_size(), self.get_output_vocab_size())
-        input_vocab_items = self.input_vocab.items()
-        # Go over all (token, id) items in input vocab
-        for src_token, src_id in input_vocab_items:
-            tgt_id = self.output_vocab.get(src_token, self.unk_id)
+        src_to_tgt_conversion_matrix = torch.zeros(self.src_vocab_size, self.tgt_vocab_size, device=self.device)
+        src_vocab_items = self.src_vocab.items()
+        # Go over all (token, id) items in src vocab
+        for src_token, src_id in src_vocab_items:
+            tgt_id = self.tgt_vocab.get(src_token, self.unk_id)
             src_to_tgt_conversion_matrix[src_id][tgt_id] = 1
         return src_to_tgt_conversion_matrix
 

@@ -8,14 +8,16 @@ from decoder import TransformerDecoder, TransformerDecoderFinalLayer
 
 
 class PointerGeneratorTransformer(nn.Module):
-    def __init__(self, src_vocab_size, tgt_vocab_size, input_to_output_vocab_conversion_matrix, embedding_dim,
-                 fcn_hidden_dim, num_heads, num_layers, dropout=0.1):
+    def __init__(self, src_vocab_size=128, tgt_vocab_size=128,
+                 embedding_dim=128, fcn_hidden_dim=128,
+                 num_heads=4, num_layers=2, dropout=0.2,
+                 src_to_tgt_vocab_conversion_matrix=None):
         super(PointerGeneratorTransformer, self).__init__()
 
         self.src_vocab_size = src_vocab_size
         self.tgt_vocab_size = tgt_vocab_size
         self.embedding_dim = embedding_dim
-        self.input_to_output_vocab_conversion_matrix = input_to_output_vocab_conversion_matrix
+        self.src_to_tgt_vocab_conversion_matrix = src_to_tgt_vocab_conversion_matrix
         self.pos_encoder = PositionalEncoding(embedding_dim)
         # Source and target embeddings
         self.src_embed = Embedding(self.src_vocab_size, embedding_dim, padding_idx=2)
@@ -55,8 +57,76 @@ class PointerGeneratorTransformer(nn.Module):
             if p.dim() > 1:
                 xavier_uniform_(p)
 
-    def forward(self, src, tgt, has_mask=True, src_key_padding_mask=None, tgt_key_padding_mask=None,
-                memory_key_padding_mask=None):
+
+    def encode(self, src, src_key_padding_mask=None):
+        """
+        Applies embedding, positional encoding and then runs the transformer encoder on the source
+        :param src: source tokens batch
+        :param src_key_padding_mask: source padding mask
+        :return: memory- the encoder hidden states
+        """
+        # Source embedding and positional encoding, changes dimension (N, S) -> (N, S, E) -> (S, N, E)
+        src_embed = self.src_embed(src).transpose(0, 1)
+        src_embed = self.pos_encoder(src_embed)
+        # Pass the source to the encoder
+        memory = self.encoder(src_embed, mask=self.src_mask, src_key_padding_mask=src_key_padding_mask)
+        return memory
+
+    def decode(self, memory, tgt, src, tgt_key_padding_mask=None, memory_key_padding_mask=None, has_mask=True):
+        """
+        Applies embedding, positional encoding on target  and then runs the transformer encoder on the memory and target.
+        Also creates square subsequent mask for teacher learning.
+        :param memory: The encoder hidden states
+        :param tgt: Target tokens batch
+        :param tgt_key_padding_mask: target padding mask
+        :param memory_key_padding_mask: memory padding mask
+        :param has_mask: Whether to use square subsequent mask for teacher learning
+        :return: decoder output
+        """
+        # Create target mask for transformer if no appropriate one was created yet, created of size (T, T)
+        if has_mask:
+            if self.tgt_mask is None or self.tgt_mask.size(0) != tgt.size(1):
+                self.tgt_mask = _generate_square_subsequent_mask(tgt.size(1)).to(tgt.device)
+        else:
+            self.tgt_mask = None
+        # Target embedding and positional encoding, changes dimension (N, T) -> (N, T, E) -> (T, N, E)
+        tgt_embed = self.tgt_embed(tgt).transpose(0, 1)
+        tgt_embed_pos = self.pos_encoder(tgt_embed)
+        # Get output of decoder and attention weights. decoder Dimensions stay the same
+        decoder_output, attention = self.decoder(tgt_embed_pos, memory, tgt_mask=self.tgt_mask,
+                                                 memory_mask=self.mem_mask,
+                                                 tgt_key_padding_mask=tgt_key_padding_mask,
+                                                 memory_key_padding_mask=memory_key_padding_mask)
+        # Get probability over target vocabulary, (T, N, E) -> (T, N, tgt_vocab_size)
+        p_vocab = self.p_vocab(decoder_output)
+
+        # ---Compute Pointer Generator probability---
+        # Get hidden states of source (easier/more understandable computation). (S, N, E) -> (N, S, E)
+        hidden_states = memory.transpose(0, 1)
+        # compute context vectors. (N, T, S) x (N, S, E) -> (N, T, E)
+        context_vectors = torch.matmul(attention, hidden_states).transpose(0, 1)
+        total_states = torch.cat((context_vectors, decoder_output, tgt_embed), dim=-1)
+        # Get probability of generating output. (N, T, 3*E) -> (N, T, 1)
+        p_gen = self.p_gen(total_states)
+        # Get probability of copying from input. (N, T, 1)
+        p_copy = 1 - p_gen
+
+        # Get representation of src tokens as one hot encoding
+        one_hot = torch.zeros(src.size(0), src.size(1), self.src_vocab_size, device=src.device)
+        one_hot = one_hot.scatter_(dim=-1, index=src.unsqueeze(-1), value=1)
+        # p_copy from source is sum over all attention weights for each token in source
+        p_copy_src_vocab = torch.matmul(attention, one_hot)
+        # convert representation of token from src vocab to tgt vocab
+        p_copy_tgt_vocab = torch.matmul(p_copy_src_vocab, self.src_to_tgt_vocab_conversion_matrix).transpose(0,
+                                                                                                                  1)
+        # Compute final probability
+        p = torch.add(p_vocab * p_gen, p_copy_tgt_vocab * p_copy)
+
+        # Change back batch and sequence dimensions, from (T, N, tgt_vocab_size) -> (N, T, tgt_vocab_size)
+        return torch.log(p.transpose(0, 1))
+
+    def forward(self, src, tgt, src_key_padding_mask=None, tgt_key_padding_mask=None,
+                memory_key_padding_mask=None, has_mask=True):
         """Take in and process masked source/target sequences.
 
 		Args:
@@ -101,57 +171,15 @@ class PointerGeneratorTransformer(nn.Module):
 			output = transformer_model(src, tgt, src_mask=src_mask, tgt_mask=tgt_mask)
 		"""
 
-        # Create target mask for transformer if no appropriate one was created yet, created of size (T, T)
-        if has_mask:
-            if self.tgt_mask is None or self.tgt_mask.size(0) != tgt.size(1):
-                self.tgt_mask = _generate_square_subsequent_mask(tgt.size(1)).to(src.device)
-        else:
-            self.tgt_mask = None
-
-        # Source embedding and positional encoding, changes dimension (N, S) -> (N, S, E) -> (S, N, E)
-        src_embed = self.src_embed(src).transpose(0, 1)
-        src_embed_pos = self.pos_encoder(src_embed)
-        # Pass the source to the encoder
-        memory = self.encoder(src_embed_pos, mask=self.src_mask, src_key_padding_mask=src_key_padding_mask)
-        # Target embedding and positional encoding, changes dimension (N, T) -> (N, T, E) -> (T, N, E)
-        tgt_embed = self.tgt_embed(tgt).transpose(0, 1)
-        tgt_embed_pos = self.pos_encoder(tgt_embed)
-        # Get output of decoder and attention weights. decoder Dimensions stay the same
-        decoder_output, attention = self.decoder(tgt_embed_pos, memory, tgt_mask=self.tgt_mask,
-                                                 memory_mask=self.mem_mask,
-                                                 tgt_key_padding_mask=tgt_key_padding_mask,
-                                                 memory_key_padding_mask=memory_key_padding_mask)
-        # Get probability over target vocabulary, (T, N, E) -> (T, N, tgt_vocab_size)
-        p_vocab = self.p_vocab(decoder_output)
-
-        # ---Compute Pointer Generator probability---
-        # Get hidden states of source (easier/more understandable computation). (S, N, E) -> (N, S, E)
-        hidden_states = memory.transpose(0, 1)
-        # compute context vectors. (N, T, S) x (N, S, E) -> (N, T, E)
-        context_vectors = torch.matmul(attention, hidden_states).transpose(0, 1)
-        total_states = torch.cat((context_vectors, decoder_output, tgt_embed), dim=-1)
-        # Get probability of generating output. (N, T, 3*E) -> (N, T, 1)
-        p_gen = self.p_gen(total_states)
-        # Get probability of copying from input. (N, T, 1)
-        p_copy = 1 - p_gen
-
-        # Get representation of src tokens as one hot encoding
-        one_hot = torch.zeros(src.size(0), src.size(1), self.src_vocab_size)
-        one_hot = one_hot.scatter_(dim=-1, index=src.unsqueeze(-1), value=1)
-        # p_copy from source is sum over all attention weights for each token in source
-        p_copy_src_vocab = torch.matmul(attention, one_hot)
-        # convert representation of token from src vocab to tgt vocab
-        p_copy_tgt_vocab = torch.matmul(p_copy_src_vocab, self.input_to_output_vocab_conversion_matrix).transpose(0, 1)
-        # Compute final probability
-        p = torch.add(p_vocab * p_gen, p_copy_tgt_vocab * p_copy)
-
-        # Change back batch and sequence dimensions, from (T, N, tgt_vocab_size) -> (N, T, tgt_vocab_size)
-        return torch.log(p.transpose(0, 1))
+        # Applies embedding, positional encoding and the transformer encoder on the source
+        memory = self.encode(src, src_key_padding_mask)
+        # Applies embedding, positional encoding on target  and then runs the transformer encoder on the memory and target.
+        output = self.decode(memory, tgt, src, tgt_key_padding_mask, memory_key_padding_mask, has_mask)
+        return output
 
 
-# scripted_module = torch.jit.script(ContextVectors())
-# print(scripted_module.code)
-#
+
+
 # def get_context_vectors_1(self, hidden_states, attention, N, T):
 #     """ compute context vectors using hidden states and attention over the source """
 #     # Replace source and embedding dimension
