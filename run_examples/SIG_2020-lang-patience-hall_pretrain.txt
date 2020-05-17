@@ -1,0 +1,22 @@
+mlg	 -1
+ceb	 -1
+hil	 -1
+mao	 -1
+gmh	 -1
+kon	 -1
+lin	 -1
+sot	 -1
+zul	 -1
+gaa	 -1
+zpv	 -1
+izh	 -1
+mwf	 -1
+tel	 -1
+gml	 -1
+tgk	 -1
+dje	 -1
+xno	 -1
+kjh	 -1
+lud	 -1
+vro	 -1
+
