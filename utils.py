@@ -96,7 +96,7 @@ def load_checkpoint(model, optimizer, scheduler, checkpoint_path, logger):
     if not os.path.exists(checkpoint_path):
         logger.info(f" Trying to resume training bot file {checkpoint_path} not exists,\n"
                     f" starting training from scratch")
-        return model, optimizer, scheduler, 1, -1.0
+        return model, optimizer, scheduler, 0, -1.0
     logger.info(f"resume training, loading checkpoint from {checkpoint_path}")
     checkpoint = torch.load(checkpoint_path)
     try:
@@ -112,17 +112,19 @@ def load_checkpoint(model, optimizer, scheduler, checkpoint_path, logger):
     val_accuracy = checkpoint['val_accuracy']
     return model, optimizer, scheduler, start_epoch, val_accuracy
 
-def load_model(model, checkpoint_path):
+def load_model(model, checkpoint_path, logger):
     """
     Load checkpoint of model from checkpoint path. Used for generating prediction files.
     Only Loads state of model.
     """
-    checkpoint = torch.load(checkpoint_path)
-    state_dict = model.state_dict()
-    state_dict.update(checkpoint['state_dict'])
-    model.load_state_dict(state_dict)
-    # model.load_state_dict(checkpoint['state_dict'])
-    # model = torch.load(checkpoint['state_dict'])
+    if not os.path.exists(checkpoint_path):
+        logger.info(f" Trying to reload checkpoint from pretraining but file {checkpoint_path} not exists,\n"
+                    f" starting training from scratch")
+    else:
+        checkpoint = torch.load(checkpoint_path)
+        state_dict = model.state_dict()
+        state_dict.update(checkpoint['state_dict'])
+        model.load_state_dict(state_dict)
     return model
 
 def build_model(arch, src_vocab_size, tgt_vocab_size, embedding_dim, fcn_hidden_dim,

@@ -107,10 +107,12 @@ class DataLoader(object):
             self.train_input_ids = train_input_ids
             self.train_target_ids = train_target_ids
             self.train_target_y_ids = train_target_y_ids
+            self.train_set_size = len(self.train_input_ids)
         else:
             self.train_input_ids = None
             self.train_target_ids = None
             self.train_target_y_ids = None
+            self.train_set_size = 0
 
         if valid_file_path is not None:
             # Read validation file and get validation set, for checking loss using teacher forcing

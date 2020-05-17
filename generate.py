@@ -60,12 +60,9 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 # Initialize Tokenizer object with input and output vocabulary files
 myTokenizer = tokenizer.Tokenizer(src_vocab_file, tgt_vocab_file, device=device)
 # Load model from checkpoint in evaluation mode
-# -------------
 model = utils.build_model(args.arch, myTokenizer.src_vocab_size, myTokenizer.tgt_vocab_size, args.embed_dim, args.fcn_dim,
                 args.num_heads, args.num_layers, args.dropout, myTokenizer.src_to_tgt_vocab_conversion_matrix)
-model = utils.load_model(model, args.model_checkpoint)
-# model = torch.load(args.model_checkpoint)
-# -------------
+model = utils.load_model(model, args.model_checkpoint, logger)
 model.to(device)
 model.eval()
 # Initialize DataLoader object
@@ -96,30 +93,7 @@ def prdeict_word(src, max_seq_len):
     return outputs[0, 1:j]
 
 
-#
-# # --------For Transformer model from SIGMORPHON 2020 Baseline----------
-# def prdeict_word(src, max_seq_len):
-#     """
-#      Predicts target word given source (lemma + features). Predictions generated in greedy manner.
-#     """
-#     # Add batch dimension
-#     src = src.unsqueeze(dim=0)
-#     src = src.transpose(0, 1)
-#     outputs = torch.zeros(1, max_seq_len, dtype=torch.long, device=device)
-#     outputs[0] = myTokenizer.sos_id
-#     for j in range(1, max_seq_len):
-#         trg = outputs[:, :j]
-#         trg = trg.transpose(0, 1)
-#         src_mask = (src > 0).float()
-#         trg_mask = (trg > 0).float()
-#         # Compute output of model
-#         out = model(src, src_mask, trg, trg_mask).transpose(0, 1).squeeze()
-#         val, ix = out.topk(1)
-#         outputs[0, j] = ix[-1]
-#         if ix[-1] == myTokenizer.eos_id:
-#             break
-#     return outputs[0, :j + 1]
-#
+# --------For Transformer model from SIGMORPHON 2020 Baseline----------
 def dummy_mask(seq):
     '''
     create dummy mask (all 1)
@@ -154,8 +128,6 @@ def decode_greedy_transformer(src_sentence, max_len=40, trg_bos=myTokenizer.sos_
             break
         output.append(word.item())
     return output[1:]  # , attns
-
-
 # ------------------------------------
 
 
@@ -186,12 +158,12 @@ def generate_prediction_file(max_seq_len=MAX_TGT_SEQ_LEN):
         # where token is unkown token, copy from the source at the same token location
         unkown_idx = 0
         for j in range(len(pred_tokens)):
-            # if pred_tokens[j] == myTokenizer.unk and (j < len(data_tokens) - 1):
-            #     pred_tokens[j] = data_tokens[j + 1]  # account for data token padded with <s> at the beginning
-            if pred_tokens[j] == myTokenizer.unk:
-                pred_tokens[j] = unkown_tokens[unkown_idx]
-                # Increment index, until reaches the end, then stay
-                unkown_tokens = min(unkown_tokens + 1, len(unkown_tokens) - 1)
+            if pred_tokens[j] == myTokenizer.unk and (j < len(data_tokens) - 1):
+                pred_tokens[j] = data_tokens[j + 1]  # account for data token padded with <s> at the beginning
+            # if pred_tokens[j] == myTokenizer.unk:
+            #     pred_tokens[j] = unkown_tokens[unkown_idx]
+            #     # Increment index, until reaches the end, then stay
+            #     unkown_tokens = min(unkown_tokens + 1, len(unkown_tokens) - 1)
 
         pred_word = ''.join(pred_tokens)
         predictions.append(pred_word)
@@ -202,3 +174,27 @@ if __name__ == '__main__':
     # Generate predictions for test set
     generate_prediction_file()
     logger.info(f"Created prediction file: {out_file}\n")
+
+
+# def prdeict_word(src, max_seq_len):
+#     """
+#      Predicts target word given source (lemma + features). Predictions generated in greedy manner.
+#     """
+#     # Add batch dimension
+#     src = src.unsqueeze(dim=0)
+#     src = src.transpose(0, 1)
+#     outputs = torch.zeros(1, max_seq_len, dtype=torch.long, device=device)
+#     outputs[0] = myTokenizer.sos_id
+#     for j in range(1, max_seq_len):
+#         trg = outputs[:, :j]
+#         trg = trg.transpose(0, 1)
+#         src_mask = (src > 0).float()
+#         trg_mask = (trg > 0).float()
+#         # Compute output of model
+#         out = model(src, src_mask, trg, trg_mask).transpose(0, 1).squeeze()
+#         val, ix = out.topk(1)
+#         outputs[0, j] = ix[-1]
+#         if ix[-1] == myTokenizer.eos_id:
+#             break
+#     return outputs[0, :j + 1]
+#
