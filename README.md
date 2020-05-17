@@ -1,49 +1,34 @@
-# Transformer-Morph
-Transformer model and pointer-generator transformer for the morphological inflection task
+# Transformer and pointer-generator transformer models for the morphological inflection task
 
-**MEDIUM RESOURCE TRAINING FILE - ENGLISH EXAMPLE**
+## Submission - NYUCUBoulder, Task 0 and Task 2
 
-*Data augmentation for dataset* - python augment.py --src "data/english-train-medium" --out "data/english-train-medium-aug"
+Run pointer-generator transformer on original datatset and multitask training augmented set (for Task 0).
+```bash
+bash task0-pg-aug-launch.sh
+bash task0-pg-trn-launch.sh
+```
+Run transformer [(Vaswani et al., 2017)](https://arxiv.org/abs/1706.03762) on original datatset and multitask training augmented set (for Task 0).
+```bash
+bash task0-trm-aug-launch.sh
+bash task0-trm-trn-launch.sh
 
-*Create vocabulary for dataset* - python vocabulary.py --src "data/english-train-medium" --vocab "data/english-train-medium-vocab"
+```
 
-*Train model* - python train.py \
- --train "data/english-train-medium" --dev "data/english-dev" --vocab "data/english-train-medium-vocab" checkpoints-dir "checkpoints" \ 
- --batch-size 128 --epochs 200 --eval-every 1 --resume True \
- --arch transformer --embed-dim 64 --fcn-dim 256 --num-heads 4 --num-layers 2  --dropout 0.2 \ 
- --lr 0.001 --beta2 0.98 \
- --scheduler warmupinvsqr --patience 10 --min-lr 1e-5 --warmup-steps 4000
+Code built on top of the baseline code for Task 0 for the SIGMORPHON 2020 Shared Tasks [ (Vylomova, 2020)](https://github.com/shijie-wu/neural-transducer.git)
+Data hallucination augmentation by [(Anastasopoulos and Neubig, 2019)](https://arxiv.org/abs/1908.05838)
+You can also run hard monotonic attention [(Wu and Cotterell, 2019)](https://arxiv.org/abs/1905.06319).
 
-*Generate Predictions with model* - python generate.py \
---model-checkpoint "checkpoints/model_best.pth" \
---arch transformer --embed-dim 64 --fcn-dim 256 --num-heads 4 --num-layers 2  --dropout 0.2 \
---test "data/english-covered-test" \
---vocab "data/english-train-medium-vocab" \
---pred "data/english-test-pred-medium"
+## Dependencies
 
-*Compute accuracy of test set predictions* - python evaluate.py \
---pred "data/english-test-pred-medium" --target "data/english-test"
+- python 3
+- pytorch==1.4
+- numpy
+- tqdm
+- fire
 
 
-**LOW RESOURCE TRAINING FILE - ENGLISH EXAMPLE**
+## Install
 
-*Data augmentation for dataset* - python augment.py --src "data/english-train-low" --out "data/english-train-low-aug"
-
-*Create vocabulary for dataset* - python vocabulary.py --src "data/english-train-low" --vocab "data/english-train-low-vocab"
-
-*Train model* - python train.py \
- --train "data/english-train-low" --dev "data/english-dev" --vocab "data/english-train-low-vocab" checkpoints-dir "checkpoints" \ 
- --batch-size 128 --epochs 200 --eval-every 1 --resume True \
- --arch transformer --embed-dim 64 --fcn-dim 256 --num-heads 4 --num-layers 2  --dropout 0.2 \ 
- --lr 0.001 --beta2 0.98 \
- --scheduler warmupinvsqr --patience 10 --min-lr 1e-5 --warmup-steps 4000
-
-*Generate Predictions with model* - python generate.py \
---model-checkpoint "checkpoints/model_best.pth" \
---arch transformer --embed-dim 64 --fcn-dim 256 --num-heads 4 --num-layers 2  --dropout 0.2 \
---test "data/english-covered-test" \
---vocab "data/english-train-low-vocab" \
---pred "data/english-test-pred-low"
-
-*Compute accuracy of test set predictions* - python evaluate.py \
---pred "data/english-test-pred-low" --target "data/english-test"
+```bash
+make
+```
