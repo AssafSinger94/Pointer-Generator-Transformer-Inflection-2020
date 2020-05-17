@@ -1,7 +1,7 @@
 # Transformer-Morph
-Transformer model for the morphological inflection task
+Transformer model and pointer-generator transformer for the morphological inflection task
 
-**MEDIUM RESOURCE TRAINING FILE**
+**MEDIUM RESOURCE TRAINING FILE - ENGLISH EXAMPLE**
 
 *Data augmentation for dataset* - python augment.py --src "data/english-train-medium" --out "data/english-train-medium-aug"
 
@@ -25,7 +25,7 @@ Transformer model for the morphological inflection task
 --pred "data/english-test-pred-medium" --target "data/english-test"
 
 
-**LOW RESOURCE TRAINING FILE**
+**LOW RESOURCE TRAINING FILE - ENGLISH EXAMPLE**
 
 *Data augmentation for dataset* - python augment.py --src "data/english-train-low" --out "data/english-train-low-aug"
 
