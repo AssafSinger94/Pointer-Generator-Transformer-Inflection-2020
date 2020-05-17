@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d375a0ca-d981-4f34-8067-71cef9e79afe" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/cover.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/augment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generate.py" beforeDir="false" afterPath="$PROJECT_DIR$/generate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/align.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/align.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/multitask_augment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hallucinate.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hallucinate.sh" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +29,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../neural-transducer" />
     <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RunDashboard">
@@ -59,7 +58,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/augment.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Assaf\Documents\Courses\Year 2\Thesis\Work\Code\Transformer\transformer\multitask_augment.py" />
       <option name="PARAMETERS" value="--data-dir task0-data --aug-dir task0-data/aug --lang ang" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -208,6 +207,7 @@
       <workItem from="1588601563698" duration="1302000" />
       <workItem from="1588967468016" duration="614000" />
       <workItem from="1589102268539" duration="922000" />
+      <workItem from="1589745660929" duration="1705000" />
     </task>
     <servers />
   </component>
