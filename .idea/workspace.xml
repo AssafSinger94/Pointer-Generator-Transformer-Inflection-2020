@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d375a0ca-d981-4f34-8067-71cef9e79afe" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/align.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/align.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/multitask_augment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hallucinate.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hallucinate.sh" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +24,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../neural-transducer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RunDashboard">
@@ -208,6 +203,7 @@
       <workItem from="1588967468016" duration="614000" />
       <workItem from="1589102268539" duration="922000" />
       <workItem from="1589745660929" duration="1705000" />
+      <workItem from="1589807381941" duration="665000" />
     </task>
     <servers />
   </component>
@@ -228,15 +224,6 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/train.py</url>
-          <line>206</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="__exception__" />
