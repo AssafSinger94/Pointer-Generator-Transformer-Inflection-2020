@@ -13,11 +13,11 @@ model_copy=$3
 
 lr=0.001
 scheduler=warmupinvsqr
-max_steps=25000
+max_steps=24000
 warmup=4000
 beta2=0.98
 label_smooth=0.1
-total_eval=25000
+total_eval=24000
 bs=400
 
 # transformer
@@ -33,10 +33,10 @@ CUDA_VISIBLE_DEVICES=$gpu python src/train.py \
     --train $aug_dir/$lang.aug \
     --dev $data_dir/$lang.dev \
     --test $data_dir/$lang.tst \
-    --model $ckpt_dir/$arch-base/$lang/aug/$model_copy/model-$lang \
+    --model $ckpt_dir/$arch/$lang/aug/$model_copy/model-$lang \
     --embed_dim $embed_dim --src_hs $hs --trg_hs $hs --dropout $dropout --nb_heads $nb_heads \
     --label_smooth $label_smooth --total_eval $total_eval \
     --src_layer $layers --trg_layer $layers --max_norm 1 --lr $lr --shuffle \
     --arch $arch --gpuid 0 --estop 1e-8 --bs $bs --max_steps $max_steps \
     --scheduler $scheduler --warmup_steps $warmup --cleanup_anyway --beta2 $beta2 --bestacc --seed $seed \
-    --load $ckpt_dir/$arch-base/$lang/hall/1/model-best.epoch_0
+    --load $ckpt_dir/$arch/$lang/hall/1/model-best.epoch_0

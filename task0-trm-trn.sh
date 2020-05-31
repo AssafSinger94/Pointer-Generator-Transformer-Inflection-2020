@@ -32,7 +32,7 @@ CUDA_VISIBLE_DEVICES=$gpu python src/train.py \
     --train $data_dir/$lang.trn \
     --dev $data_dir/$lang.dev \
     --test $data_dir/$lang.tst \
-    --model $ckpt_dir/$arch-base/$lang/trn/$model_copy/model-$lang \
+    --model $ckpt_dir/$arch/$lang/trn/$model_copy/model-$lang \
     --embed_dim $embed_dim --src_hs $hs --trg_hs $hs --dropout $dropout --nb_heads $nb_heads \
     --label_smooth $label_smooth --total_eval $total_eval \
     --src_layer $layers --trg_layer $layers --max_norm 1 --lr $lr --shuffle \

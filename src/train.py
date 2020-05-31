@@ -50,6 +50,7 @@ class Arch(util.NamedEnum):
     universaltransformer = 'universaltransformer'
     tagtransformer = 'tagtransformer'
     taguniversaltransformer = 'taguniversaltransformer'
+    pointergeneratortransformer = 'pointergeneratortransformer'  # pointer-generator transformer
 
 
 class Trainer(BaseTrainer):
@@ -190,6 +191,7 @@ class Trainer(BaseTrainer):
             Arch.universaltransformer: transformer.UniversalTransformer,
             Arch.tagtransformer: transformer.TagTransformer,
             Arch.taguniversaltransformer: transformer.TagUniversalTransformer,
+            Arch.pointergeneratortransformer: transformer.PointerGeneratorTransformer,
         }
         # yapf: enable
         if params.indtag or params.mono:

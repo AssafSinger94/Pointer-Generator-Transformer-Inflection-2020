@@ -6,7 +6,7 @@ hall_dir=task0-data/hall
 ckpt_dir=checkpoints/sigmorphon20-task0
 
 lang=$1
-arch=transformer
+arch=pointergeneratortransformer
 
 seed=$2
 

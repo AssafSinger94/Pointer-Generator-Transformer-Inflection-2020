@@ -6,7 +6,7 @@ import torch
 import util
 from dataloader import BOS_IDX, EOS_IDX, STEP_IDX
 from model import Categorical, HardMonoTransducer, HMMTransducer, dummy_mask
-from transformer import Transformer
+from transformer import Transformer, PointerGeneratorTransformer
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -180,6 +180,12 @@ def decode_greedy(transducer,
                                  max_len=max_len,
                                  trg_bos=BOS_IDX,
                                  trg_eos=EOS_IDX)
+    if isinstance(transducer, PointerGeneratorTransformer):
+        return decode_greedy_pointergenerator_transformer(transducer,
+                                                          src_sentence,
+                                                          max_len=max_len,
+                                                          trg_bos=BOS_IDX,
+                                                          trg_eos=EOS_IDX)
     if isinstance(transducer, Transformer):
         return decode_greedy_transformer(transducer,
                                          src_sentence,
@@ -309,6 +315,39 @@ def decode_greedy_transformer(transducer,
 
         word_logprob = transducer.decode(enc_hs, src_mask, output_tensor,
                                          trg_mask)
+        word_logprob = word_logprob[-1]
+
+        word = torch.max(word_logprob, dim=1)[1]
+        if word == trg_eos:
+            break
+        output.append(word.item())
+    return output[1:], attns
+
+
+def decode_greedy_pointergenerator_transformer(transducer,
+                              src_sentence,
+                              max_len=100,
+                              trg_bos=BOS_IDX,
+                              trg_eos=EOS_IDX):
+    '''
+    src_sentence: [seq_len]
+    '''
+    assert isinstance(transducer, PointerGeneratorTransformer)
+    transducer.eval()
+    src_mask = dummy_mask(src_sentence)
+    src_mask = (src_mask == 0).transpose(0, 1)
+    enc_hs = transducer.encode(src_sentence, src_mask)
+
+    output, attns = [trg_bos], []
+
+    for _ in range(max_len):
+        output_tensor = torch.tensor(output,
+                                     device=DEVICE).view(len(output), 1)
+        trg_mask = dummy_mask(output_tensor)
+        trg_mask = (trg_mask == 0).transpose(0, 1)
+
+        word_logprob = transducer.decode(enc_hs, src_mask, output_tensor,
+                                         trg_mask, src_sentence.transpose(0, 1))
         word_logprob = word_logprob[-1]
 
         word = torch.max(word_logprob, dim=1)[1]

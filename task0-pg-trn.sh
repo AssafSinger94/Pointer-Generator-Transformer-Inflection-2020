@@ -4,7 +4,7 @@ data_dir=task0-data/out
 ckpt_dir=checkpoints/sigmorphon20-task0
 
 lang=$1
-arch=transformer
+arch=pointergeneratortransformer
 
 seed=$2
 
@@ -27,12 +27,12 @@ nb_heads=4
 dropout=${4:-0.3}
 
 
-CUDA_VISIBLE_DEVICES=$gpu python src-pg/train.py \
+CUDA_VISIBLE_DEVICES=$gpu python src/train.py \
     --dataset sigmorphon17task1 \
     --train $data_dir/$lang.trn \
     --dev $data_dir/$lang.dev \
     --test $data_dir/$lang.tst \
-    --model $ckpt_dir/$arch-pg/$lang/trn/$model_copy/model-$lang \
+    --model $ckpt_dir/$arch/$lang/trn/$model_copy/model-$lang \
     --embed_dim $embed_dim --src_hs $hs --trg_hs $hs --dropout $dropout --nb_heads $nb_heads \
     --label_smooth $label_smooth --total_eval $total_eval \
     --src_layer $layers --trg_layer $layers --max_norm 1 --lr $lr --shuffle \

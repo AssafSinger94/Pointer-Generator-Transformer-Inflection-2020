@@ -344,7 +344,7 @@ class BaseTrainer(object):
         result = re.search('.epoch_(.*)', filename)
         return int(result.group(1))
 
-    def cleanup(self, saveall, save_fps, model_fp, max_epochs):
+    def cleanup(self, saveall, save_fps, max_epochs):
         if not saveall:
             for model in self.models:
                 if model.filepath in save_fps:
@@ -353,7 +353,6 @@ class BaseTrainer(object):
                 elif self.get_epoch_number(model.filepath) >= (max_epochs - 5):
                     continue
                 os.remove(model.filepath)
-        # os.remove(f'{model_fp}.progress')
 
     # def cleanup(self, saveall, save_fps, model_fp):
     #     if not saveall:
@@ -409,5 +408,5 @@ class BaseTrainer(object):
                                      decode_fn)
             # -----------------
             # self.cleanup(params.saveall, save_fps, params.model)
-            self.cleanup(params.saveall, save_fps, params.model, max_epochs)
+            self.cleanup(params.saveall, save_fps, max_epochs)
             # -----------------
